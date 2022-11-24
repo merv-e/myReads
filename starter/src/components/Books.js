@@ -1,13 +1,19 @@
-import React, {useState} from 'react'
+import React, { useState} from 'react'
 import BookShelfManager from './BookShelfManager'
 import PropTypes from 'prop-types'
 
 
-const Books = ({ shelf }) => {  
+const Books = ({ shelf, currentlyReading, addToCurReading }) => {  
 
-const [currentlyReading, setCurrentlyReading] = useState([]);
-const [wantToRead, setWantToRead] = useState([]);
-const [read, setRead] = useState([]);
+
+  const [wantToRead, setWantToRead] = useState([]);
+  const [read, setRead] = useState([]);
+  
+  // console.log(currentlyReading);
+
+
+
+
 
   return (
     <>
@@ -23,6 +29,7 @@ const [read, setRead] = useState([]);
               { 
                 currentlyReading.map((book) => 
                 <li key={book.id}>
+                {console.log(currentlyReading)}
                   <div className="book">
                     <div className="book-top">
                       <div
@@ -34,7 +41,8 @@ const [read, setRead] = useState([]);
                             `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                      <BookShelfManager  /> 
+                      <BookShelfManager addToCurReading={addToCurReading}  /> 
+                      
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -49,7 +57,7 @@ const [read, setRead] = useState([]);
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                wantToRead.map((book) => 
+                shelf.map((book) => 
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
@@ -107,10 +115,10 @@ const [read, setRead] = useState([]);
   )
 }
 
-Books.propTypes = {
-  currrentlyReading : PropTypes.array.isRequired,
-  wantToRead : PropTypes.array.isRequired,
-  read : PropTypes.array.isRequired,
-}
+// Books.propTypes = {
+//   currrentlyReading : PropTypes.array.isRequired,
+//   wantToRead : PropTypes.array.isRequired,
+//   read : PropTypes.array.isRequired,
+// }
 
 export default Books

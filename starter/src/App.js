@@ -7,6 +7,7 @@ function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
 
   const [shelf, setShelf] = useState([]);
+  const [currentlyReading, setCurrentlyReading] = useState([]);
 
   useEffect(()=> { 
     const getBooks = async() => {
@@ -16,6 +17,14 @@ function App() {
     }
     getBooks();
   }, []);
+
+
+
+  const addToCurReading = (book) => {
+    // shelf.filter((book) => book.title !== currentlyReading.title)
+    // .map((book) => (book.id) ) ;
+    setCurrentlyReading([...currentlyReading, book]);
+};
   
   return (
     <div className="app">
@@ -43,7 +52,11 @@ function App() {
       ) : (
         
         <div className="list-books">     
-          <Books shelf={shelf} />
+          <Books 
+          shelf={shelf} 
+          currentlyReading={currentlyReading}
+          addToCurReading={addToCurReading}
+          />
 
           <div className="open-search">    
             <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
