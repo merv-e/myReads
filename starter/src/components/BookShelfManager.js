@@ -1,13 +1,13 @@
 import React from 'react'
 
-const BookShelfManager = () => {
+const BookShelfManager = ({addBookToCurrentlyReading}) => {
   return (
     <div className="book-shelf-changer">
         <select>
           <option value="none" disabled>
             Move to...
           </option>
-          <option value="currentlyReading">
+          <option value="currentlyReading" onClick={() => addBookToCurrentlyReading()}>
             Currently Reading
           </option>
           <option value="wantToRead">Want to Read</option>

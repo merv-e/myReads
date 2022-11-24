@@ -1,9 +1,23 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Books from "./components/Books";
+import * as BooksAPI from "./BooksAPI";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
+
+  const {shelf, setShelf} = useState([]);
+  const [currentlyReading, setCurrentlyReading] = useState([]);
+  
+  useEffect(()=> { 
+    const getBooks = async() => {
+      const res = await BooksAPI.getAll();
+      setShelf(res);
+      console.log(res);
+    }
+    getBooks();
+  }, [setShelf]);
+  
 
   return (
     <div className="app">
@@ -29,9 +43,19 @@ function App() {
           </div>
         </div>
       ) : (
-        <div className="list-books">      {/* Parent */}
-          <Books />
-          <div className="open-search">     {/* Child */}
+        
+        <div className="list-books">     
+          <Books currentlyReading={currentlyReading} 
+              />
+            {/* addBookToCurrentlyReading={() => addBookToCurrentlyReading(book) }
+            
+            wantToRead={wantToRead}  
+            read={read} 
+            addBookToWantToRead= {addBookToWantToRead}
+            addBookToRead={addBookToRead} 
+            onAddBook={addBookToAShelf} */}
+
+          <div className="open-search">    
             <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
           </div>
         </div>
