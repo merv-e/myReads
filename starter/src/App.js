@@ -6,8 +6,8 @@ import * as BooksAPI from "./BooksAPI";
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
 
-  const {shelf, setShelf} = useState([]);
-  const [currentlyReading, setCurrentlyReading] = useState([]);
+  const [shelf, setShelf] = useState([]);
+
   
   useEffect(()=> { 
     const getBooks = async() => {
@@ -16,12 +16,16 @@ function App() {
       console.log(res);
     }
     getBooks();
-  }, [setShelf]);
+  }, []);
   
+
+  // useEffect(() => { 
+    
+  // })
 
   return (
     <div className="app">
-     {/* Child */}
+
       {showSearchPage ? (    
         <div className="search-books">
           <div className="search-books-bar">
@@ -45,12 +49,13 @@ function App() {
       ) : (
         
         <div className="list-books">     
-          <Books currentlyReading={currentlyReading} 
+          <Books shelf={shelf} 
               />
-            {/* addBookToCurrentlyReading={() => addBookToCurrentlyReading(book) }
-            
+            {/* 
+            currentlyReading={currentlyReading}
             wantToRead={wantToRead}  
             read={read} 
+            addBookToCurrentlyReading={() => addBookToCurrentlyReading(book) }
             addBookToWantToRead= {addBookToWantToRead}
             addBookToRead={addBookToRead} 
             onAddBook={addBookToAShelf} */}
