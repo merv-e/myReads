@@ -9,16 +9,6 @@ const [currentlyReading, setCurrentlyReading] = useState([]);
 const [wantToRead, setWantToRead] = useState([]);
 const [read, setRead] = useState([]);
 
-
-const clickedBook = (book) => {
-  setCurrentlyReading(book);
-}
-
-const addBook = () => {
-    shelf.filter((book) => book.title !== currentlyReading.title);
-}; 
-
-
   return (
     <>
     <div className="list-books-title"> 
