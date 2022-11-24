@@ -8,17 +8,15 @@ function App() {
 
   const [shelf, setShelf] = useState([]);
 
-  
   useEffect(()=> { 
     const getBooks = async() => {
       const res = await BooksAPI.getAll();
       setShelf(res);
-      console.log(res);
+      // console.log(res);
     }
     getBooks();
   }, []);
   
-
   return (
     <div className="app">
 
@@ -45,8 +43,7 @@ function App() {
       ) : (
         
         <div className="list-books">     
-          <Books shelf={shelf} 
-              />
+          <Books shelf={shelf} />
 
           <div className="open-search">    
             <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>

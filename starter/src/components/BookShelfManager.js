@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BookShelfManager = ({addBookToCurrentlyReading}) => {
+const BookShelfManager = () => {
   return (
     <div className="book-shelf-changer">
         <select>
