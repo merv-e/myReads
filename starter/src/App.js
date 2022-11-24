@@ -19,10 +19,6 @@ function App() {
   }, []);
   
 
-  // useEffect(() => { 
-    
-  // })
-
   return (
     <div className="app">
 
@@ -51,14 +47,6 @@ function App() {
         <div className="list-books">     
           <Books shelf={shelf} 
               />
-            {/* 
-            currentlyReading={currentlyReading}
-            wantToRead={wantToRead}  
-            read={read} 
-            addBookToCurrentlyReading={() => addBookToCurrentlyReading(book) }
-            addBookToWantToRead= {addBookToWantToRead}
-            addBookToRead={addBookToRead} 
-            onAddBook={addBookToAShelf} */}
 
           <div className="open-search">    
             <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>

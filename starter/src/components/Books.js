@@ -9,8 +9,6 @@ const [currentlyReading, setCurrentlyReading] = useState([]);
 const [wantToRead, setWantToRead] = useState([]);
 const [read, setRead] = useState([]);
 
-
-
   return (
     <>
     <div className="list-books-title"> 

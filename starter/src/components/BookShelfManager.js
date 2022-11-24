@@ -7,7 +7,7 @@ const BookShelfManager = ({addBookToCurrentlyReading}) => {
           <option value="none" disabled>
             Move to...
           </option>
-          <option value="currentlyReading" onClick={() => addBookToCurrentlyReading()}>
+          <option value="currentlyReading"> 
             Currently Reading
           </option>
           <option value="wantToRead">Want to Read</option>
