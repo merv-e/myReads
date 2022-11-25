@@ -1,11 +1,9 @@
 import React, { useState} from 'react'
-import BookShelfManager from './BookShelfManager'
+// import BookShelfManager from './BookShelfManager'
 // import PropTypes from 'prop-types'
 
 
 const Books = ({ defaultBooks}) => {  
-
-  const [values, setValues] = useState("");
 
   const [currentlyReading, setCurrentlyReading] = useState([defaultBooks[0], defaultBooks[1]]);
 
@@ -13,26 +11,13 @@ const Books = ({ defaultBooks}) => {
 
   const [read, setRead] = useState([defaultBooks[5], defaultBooks[6]]);
 
-  const handleSelection = (e) => {
-    setValues(e.target.value);
-
-    for(let i=0 ; i<defaultBooks.length; i++) { 
-      if (e.target.value === "currentlyReading") {
-        if (e.target.id === defaultBooks[i].id){
-          setCurrentlyReading(currentlyReading.concat(defaultBooks[i])) 
-        } 
-      }
-        // : e.target.value === "WantToRead" 
-        // ? setWantToRead(wantToRead.concat(defaultBooks[i])) 
-        // : setRead(read.concat(defaultBooks[i])) ;
-
-        // defaultBooks[i]
-        console.log(e.target.id);
-        console.log(e.target.value);
-
-    }
-  }
-  // console.log(currentlyReading)
+  const defaultValues = [
+        "Currently Reading", 
+        "Want To Read", 
+        "Read",
+        "None"];
+    
+  const [selectedValue, setSelectedValue] = useState("");
 
   return (
     <>
@@ -60,12 +45,16 @@ const Books = ({ defaultBooks}) => {
                             `url(${book.backgroundImage})`
                         }}
                       ></div>
-                      <BookShelfManager 
-                      id={book.id}
-                      name={book.title}
-                      values={values}
-                      handleSelection={handleSelection}
-                      /> 
+                    <div className="book-shelf-changer">
+                      <select
+                        value={selectedValue}
+                        onChange={(ev) => setSelectedValue(ev.target.value) }>
+                        {
+                        defaultValues.map((value) => (
+                        <option value={value} key={value}> {value} </option>
+                      ))}
+                      </select>
+                    </div>
                       
                     </div>
                     <div className="book-title">{book.title}</div> 
@@ -94,12 +83,16 @@ const Books = ({ defaultBooks}) => {
                           `url(${book.backgroundImage})`
                         }}
                       ></div>
-                      <BookShelfManager
-                      id={book.id}
-                      name={book.title}
-                      values={values}
-                      handleSelection={handleSelection}
-                      /> 
+                      <div className="book-shelf-changer">
+                        <select 
+                          value={selectedValue}
+                          onChange={(ev) => setSelectedValue(ev.target.value) }>
+                          {
+                          defaultValues.map((value) => (
+                          <option value={value} key={value}> {value} </option>
+                        ))}
+                        </select>
+                      </div>
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -127,12 +120,16 @@ const Books = ({ defaultBooks}) => {
                           `url(${book.backgroundImage})`
                         }}
                       ></div>
-                      <BookShelfManager
-                        id={book.id}
-                        name={book.title}
-                        values={values}
-                        handleSelection={handleSelection} 
-                      /> 
+                      <div className="book-shelf-changer">
+                        <select
+                          value={selectedValue}
+                          onChange={(ev) => setSelectedValue(ev.target.value) }>
+                          {
+                          defaultValues.map((value) => (
+                          <option value={value} key={value}> {value} </option>
+                        ))}
+                        </select>
+                    </div>
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
