@@ -1,18 +1,21 @@
 import React, { useState} from 'react'
-import BookShelfManager from './BookShelfManager'
-import PropTypes from 'prop-types'
+// import BookShelfManager from './BookShelfManager'
+// import PropTypes from 'prop-types'
 
 
-const Books = ({ shelf, currentlyReading, addToCurReading }) => {  
+const Books = ({ defaultBooks}) => {  
 
+  const [values, setValues] = useState("");
 
-  const [wantToRead, setWantToRead] = useState([]);
-  const [read, setRead] = useState([]);
-  
-  // console.log(currentlyReading);
+  const [currentlyReading, setCurrentlyReading] = useState([defaultBooks[0], defaultBooks[1]]);
 
+  const [wantToRead, setWantToRead] = useState([defaultBooks[2], defaultBooks[3], defaultBooks[4]]);
 
+  const [read, setRead] = useState([defaultBooks[5], defaultBooks[6]]);
 
+  const handleSelection = (e) => {
+    setValues(e.target.value);
+  };
 
 
   return (
@@ -29,7 +32,6 @@ const Books = ({ shelf, currentlyReading, addToCurReading }) => {
               { 
                 currentlyReading.map((book) => 
                 <li key={book.id}>
-                {console.log(currentlyReading)}
                   <div className="book">
                     <div className="book-top">
                       <div
@@ -38,10 +40,14 @@ const Books = ({ shelf, currentlyReading, addToCurReading }) => {
                           width: 128,
                           height: 193,
                           backgroundImage:
-                            `url(${book.imageLinks.smallThumbnail})`
+                          // book.imageLinks.smallThumbnail
+                            `url(${book.backgroundImage})`
                         }}
                       ></div>
-                      <BookShelfManager addToCurReading={addToCurReading}  /> 
+                      <BookShelfManager 
+                      values={values}
+                      handleSelection={handleSelection}
+                      /> 
                       
                     </div>
                     <div className="book-title">{book.title}</div> 
@@ -57,7 +63,7 @@ const Books = ({ shelf, currentlyReading, addToCurReading }) => {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                shelf.map((book) => 
+                wantToRead.map((book) => 
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
@@ -67,11 +73,13 @@ const Books = ({ shelf, currentlyReading, addToCurReading }) => {
                           width: 128,
                           height: 193,
                           backgroundImage:
-                            `url(${book.imageLinks.smallThumbnail})`
+                          `url(${book.backgroundImage})`
                         }}
                       ></div>
-                      <BookShelfManager  /> 
-                      {/* addBookToCurrentlyReading={() => addBookToCurrentlyReading()} */}
+                      <BookShelfManager
+                      values={values} 
+                      handleSelection={handleSelection}
+                      /> 
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -96,10 +104,13 @@ const Books = ({ shelf, currentlyReading, addToCurReading }) => {
                           width: 128,
                           height: 193,
                           backgroundImage:
-                            `url(${book.imageLinks.smallThumbnail})`
+                          `url(${book.backgroundImage})`
                         }}
                       ></div>
-                      <BookShelfManager  /> 
+                      <BookShelfManager
+                         values={values}
+                          handleSelection={handleSelection} 
+                      /> 
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
