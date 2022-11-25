@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-// import BookShelfManager from './BookShelfManager'
+import BookShelfManager from './BookShelfManager'
 // import PropTypes from 'prop-types'
 
 
@@ -15,8 +15,24 @@ const Books = ({ defaultBooks}) => {
 
   const handleSelection = (e) => {
     setValues(e.target.value);
-  };
 
+    for(let i=0 ; i<defaultBooks.length; i++) { 
+      if (e.target.value === "currentlyReading") {
+        if (e.target.id === defaultBooks[i].id){
+          setCurrentlyReading(currentlyReading.concat(defaultBooks[i])) 
+        } 
+      }
+        // : e.target.value === "WantToRead" 
+        // ? setWantToRead(wantToRead.concat(defaultBooks[i])) 
+        // : setRead(read.concat(defaultBooks[i])) ;
+
+        // defaultBooks[i]
+        console.log(e.target.id);
+        console.log(e.target.value);
+
+    }
+  }
+  // console.log(currentlyReading)
 
   return (
     <>
@@ -45,6 +61,8 @@ const Books = ({ defaultBooks}) => {
                         }}
                       ></div>
                       <BookShelfManager 
+                      id={book.id}
+                      name={book.title}
                       values={values}
                       handleSelection={handleSelection}
                       /> 
@@ -77,7 +95,9 @@ const Books = ({ defaultBooks}) => {
                         }}
                       ></div>
                       <BookShelfManager
-                      values={values} 
+                      id={book.id}
+                      name={book.title}
+                      values={values}
                       handleSelection={handleSelection}
                       /> 
                     </div>
@@ -108,8 +128,10 @@ const Books = ({ defaultBooks}) => {
                         }}
                       ></div>
                       <BookShelfManager
-                         values={values}
-                          handleSelection={handleSelection} 
+                        id={book.id}
+                        name={book.title}
+                        values={values}
+                        handleSelection={handleSelection} 
                       /> 
                     </div>
                     <div className="book-title">{book.title}</div> 
