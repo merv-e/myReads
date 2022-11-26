@@ -5,12 +5,6 @@ import BookShelfManager from './BookShelfManager'
 
 const Books = ({ allBooks }) => {  
 
-  const [currentlyReading, setCurrentlyReading] = useState();
-
-  const [wantToRead, setWantToRead] = useState();
-
-  const [read, setRead] = useState();
-
   return (
     <>
     <div className="list-books-title"> 
@@ -66,7 +60,7 @@ const Books = ({ allBooks }) => {
                           `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                      <BookShelfManager />
+                      <BookShelfManager shelf={book.shelf} />
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -95,7 +89,7 @@ const Books = ({ allBooks }) => {
                           `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                     <BookShelfManager />
+                     <BookShelfManager shelf={book.shelf} />
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>

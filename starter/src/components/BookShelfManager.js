@@ -2,13 +2,18 @@ import React, { useState } from 'react'
 
 const BookShelfManager = ({ shelf }) => { 
     
-  const [selectedValue, setSelectedValue] = useState({shelf});
+  const [selectedShelf, setSelectedShelf] = useState(shelf);
+
+  const changeShelf = (ev) => {
+    setSelectedShelf(ev.target.value);
+    
+  };
 
   return (
     <div className="book-shelf-changer">
         <select
-          value={shelf}
-          onChange={(ev) => setSelectedValue(ev.target.value)}>
+          value={selectedShelf}
+          onChange={changeShelf}>
          <option value="none" disabled >Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
