@@ -1,23 +1,15 @@
 import React, { useState} from 'react'
-// import BookShelfManager from './BookShelfManager'
+import BookShelfManager from './BookShelfManager'
 // import PropTypes from 'prop-types'
 
 
-const Books = ({ defaultBooks}) => {  
+const Books = ({ allBooks }) => {  
 
-  const [currentlyReading, setCurrentlyReading] = useState([defaultBooks[0], defaultBooks[1]]);
+  const [currentlyReading, setCurrentlyReading] = useState();
 
-  const [wantToRead, setWantToRead] = useState([defaultBooks[2], defaultBooks[3], defaultBooks[4]]);
+  const [wantToRead, setWantToRead] = useState();
 
-  const [read, setRead] = useState([defaultBooks[5], defaultBooks[6]]);
-
-  const defaultValues = [
-        "Currently Reading", 
-        "Want To Read", 
-        "Read",
-        "None"];
-    
-  const [selectedValue, setSelectedValue] = useState("");
+  const [read, setRead] = useState();
 
   return (
     <>
@@ -31,7 +23,8 @@ const Books = ({ defaultBooks}) => {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                currentlyReading.map((book) => 
+                allBooks.filter((book) => book.shelf === "currentlyReading")
+                .map((book) => 
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
@@ -41,21 +34,10 @@ const Books = ({ defaultBooks}) => {
                           width: 128,
                           height: 193,
                           backgroundImage:
-                          // book.imageLinks.smallThumbnail
-                            `url(${book.backgroundImage})`
+                            `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                    <div className="book-shelf-changer">
-                      <select
-                        value={selectedValue}
-                        onChange={(ev) => setSelectedValue(ev.target.value) }>
-                        {
-                        defaultValues.map((value) => (
-                        <option value={value} key={value}> {value} </option>
-                      ))}
-                      </select>
-                    </div>
-                      
+               <BookShelfManager shelf={book.shelf} />    
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -70,7 +52,8 @@ const Books = ({ defaultBooks}) => {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                wantToRead.map((book) => 
+                allBooks.filter((book) => book.shelf === "wantToRead")
+                .map((book) => 
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
@@ -80,19 +63,10 @@ const Books = ({ defaultBooks}) => {
                           width: 128,
                           height: 193,
                           backgroundImage:
-                          `url(${book.backgroundImage})`
+                          `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                      <div className="book-shelf-changer">
-                        <select 
-                          value={selectedValue}
-                          onChange={(ev) => setSelectedValue(ev.target.value) }>
-                          {
-                          defaultValues.map((value) => (
-                          <option value={value} key={value}> {value} </option>
-                        ))}
-                        </select>
-                      </div>
+                      <BookShelfManager />
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -107,7 +81,8 @@ const Books = ({ defaultBooks}) => {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                read.map((book) => 
+                allBooks.filter((book) => book.shelf === "read")
+                .map((book) =>  
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
@@ -117,19 +92,10 @@ const Books = ({ defaultBooks}) => {
                           width: 128,
                           height: 193,
                           backgroundImage:
-                          `url(${book.backgroundImage})`
+                          `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                      <div className="book-shelf-changer">
-                        <select
-                          value={selectedValue}
-                          onChange={(ev) => setSelectedValue(ev.target.value) }>
-                          {
-                          defaultValues.map((value) => (
-                          <option value={value} key={value}> {value} </option>
-                        ))}
-                        </select>
-                    </div>
+                     <BookShelfManager />
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
