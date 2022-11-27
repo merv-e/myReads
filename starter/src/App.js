@@ -1,30 +1,34 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import Books from "./components/Books";
+import BookShelf from "./components/BookShelf";
 import * as BooksAPI from "./BooksAPI";
 
 
 const App = () => {
+
   const [showSearchPage, setShowSearchpage] = useState(false);
 
-     const [allBooks, setAllBooks] = useState([]);   
+    const [data, setData] = useState([]);   
 
       useEffect(()=> { 
-       const getBooks = async() => {
+       const getData = async() => {
          const res = await BooksAPI.getAll();
-         setAllBooks(res);
+         setData(res);
          console.log(res);
-       }
-       getBooks();
+       };
+       getData();
      }, []);
 
-      useEffect(()=> {
-        const updateBook = async() => { 
-          const res = await BooksAPI.update();
-          
-        }
-      }, []);
-  
+  const filterBookName = (nameOfTheBook) => data.filter(book => book.title === nameOfTheBook).map(book => book.title);
+
+  // console.log(filterBookName);
+
+  const changeShelf = (nameOfTheBook) => {
+    filterBookName(nameOfTheBook);
+    // setData([data]);
+  };
+
+
   return (
     <div className="app">
 
@@ -51,8 +55,9 @@ const App = () => {
       ) : (
         
         <div className="list-books">     
-          <Books 
-           allBooks = {allBooks}
+          <BookShelf 
+           data = {data}
+           changeShelf={() => changeShelf(filterBookName)}
           />
 
           <div className="open-search">    

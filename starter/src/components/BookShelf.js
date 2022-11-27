@@ -1,10 +1,14 @@
 import React, { useState} from 'react'
 import BookShelfManager from './BookShelfManager'
-// import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types's
 
 
-const Books = ({ allBooks }) => {  
-
+const BookShelf = ({ data, changeShelf }) => {  
+  
+  const changeShelfInMenu = () => {  
+    
+        // x();
+  };
   return (
     <>
     <div className="list-books-title"> 
@@ -17,7 +21,7 @@ const Books = ({ allBooks }) => {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                allBooks.filter((book) => book.shelf === "currentlyReading")
+                data.filter((book) => book.shelf === "currentlyReading")
                 .map((book) => 
                 <li key={book.id}>
                   <div className="book">
@@ -31,7 +35,14 @@ const Books = ({ allBooks }) => {
                             `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-               <BookShelfManager shelf={book.shelf} />    
+               <BookShelfManager 
+               changeShelf={changeShelf}
+               changeShelfInMenu={changeShelfInMenu}
+               data={data}
+               name = {book.title}
+               shelf={book.shelf}                
+               />    
+          {/* {console.log(book.shelf)} */}
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -46,7 +57,7 @@ const Books = ({ allBooks }) => {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                allBooks.filter((book) => book.shelf === "wantToRead")
+                data.filter((book) => book.shelf === "wantToRead")
                 .map((book) => 
                 <li key={book.id}>
                   <div className="book">
@@ -60,7 +71,14 @@ const Books = ({ allBooks }) => {
                           `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                      <BookShelfManager shelf={book.shelf} />
+                      <BookShelfManager
+                      changeShelfInMenu={changeShelfInMenu}
+                      changeShelf=
+                      {changeShelf}
+                      id = {data.id}
+                      data={data}
+                      name = {book.title}
+                      shelf={book.shelf} />
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -75,7 +93,7 @@ const Books = ({ allBooks }) => {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
               { 
-                allBooks.filter((book) => book.shelf === "read")
+                data.filter((book) => book.shelf === "read")
                 .map((book) =>  
                 <li key={book.id}>
                   <div className="book">
@@ -89,7 +107,12 @@ const Books = ({ allBooks }) => {
                           `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                     <BookShelfManager shelf={book.shelf} />
+                     <BookShelfManager
+                     changeShelfInMenu={changeShelfInMenu}
+                     changeShelf={changeShelf} 
+                     data={data}
+                     name = {book.title}
+                     shelf={book.shelf} />
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -106,9 +129,7 @@ const Books = ({ allBooks }) => {
 }
 
 // Books.propTypes = {
-//   currrentlyReading : PropTypes.array.isRequired,
-//   wantToRead : PropTypes.array.isRequired,
-//   read : PropTypes.array.isRequired,
+//   books :  PropTypes.array.isRequired
 // }
 
-export default Books
+export default BookShelf
