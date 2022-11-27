@@ -1,14 +1,10 @@
-import React, { useState} from 'react'
+import React from 'react'
 import BookShelfManager from './BookShelfManager'
-// import PropTypes from 'prop-types's
+import PropTypes from 'prop-types';
 
 
-const BookShelf = ({ data, changeShelf }) => {  
-  
-  const changeShelfInMenu = () => {  
-    
-        // x();
-  };
+const BookShelf = ({ data, updateBook }) => {  
+
   return (
     <>
     <div className="list-books-title"> 
@@ -35,14 +31,12 @@ const BookShelf = ({ data, changeShelf }) => {
                             `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-               <BookShelfManager 
-               changeShelf={changeShelf}
-               changeShelfInMenu={changeShelfInMenu}
-               data={data}
+               <BookShelfManager
+               updateBook={updateBook}
+               theBook = {book}
                name = {book.title}
                shelf={book.shelf}                
                />    
-          {/* {console.log(book.shelf)} */}
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -71,11 +65,10 @@ const BookShelf = ({ data, changeShelf }) => {
                           `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
+                      {/* {console.log(book)} */}
                       <BookShelfManager
-                      changeShelfInMenu={changeShelfInMenu}
-                      changeShelf=
-                      {changeShelf}
-                      id = {data.id}
+                      updateBook={updateBook}
+                      theBook = {book}
                       data={data}
                       name = {book.title}
                       shelf={book.shelf} />
@@ -83,6 +76,7 @@ const BookShelf = ({ data, changeShelf }) => {
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
                   </div>
+                
                 </li>        
                 )}
               </ol>
@@ -108,8 +102,8 @@ const BookShelf = ({ data, changeShelf }) => {
                         }}
                       ></div>
                      <BookShelfManager
-                     changeShelfInMenu={changeShelfInMenu}
-                     changeShelf={changeShelf} 
+                     theBook = {book}
+                     updateBook={updateBook}
                      data={data}
                      name = {book.title}
                      shelf={book.shelf} />
@@ -128,8 +122,8 @@ const BookShelf = ({ data, changeShelf }) => {
   )
 }
 
-// Books.propTypes = {
-//   books :  PropTypes.array.isRequired
-// }
+BookShelf.propTypes = {
+  data :  PropTypes.array.isRequired
+}
 
 export default BookShelf

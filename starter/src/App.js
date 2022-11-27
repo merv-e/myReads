@@ -14,20 +14,15 @@ const App = () => {
        const getData = async() => {
          const res = await BooksAPI.getAll();
          setData(res);
-         console.log(res);
+  //        console.log(res);
        };
        getData();
      }, []);
 
-  const filterBookName = (nameOfTheBook) => data.filter(book => book.title === nameOfTheBook).map(book => book.title);
-
-  // console.log(filterBookName);
-
-  const changeShelf = (nameOfTheBook) => {
-    filterBookName(nameOfTheBook);
-    // setData([data]);
-  };
-
+    const updateBook =(book, shelf) => { 
+      BooksAPI.update(book, shelf);
+    };
+    
 
   return (
     <div className="app">
@@ -57,7 +52,7 @@ const App = () => {
         <div className="list-books">     
           <BookShelf 
            data = {data}
-           changeShelf={() => changeShelf(filterBookName)}
+           updateBook={updateBook}
           />
 
           <div className="open-search">    
