@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BookShelfManager from './BookShelfManager'
 import PropTypes from 'prop-types';
 
 
-const BookShelf = ({ data, updateBook }) => {  
+const BookShelf = ({ data, updateBook }) => {   
 
   return (
     <>
@@ -31,12 +31,12 @@ const BookShelf = ({ data, updateBook }) => {
                             `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-               <BookShelfManager
-               updateBook={updateBook}
-               theBook = {book}
-               name = {book.title}
-               shelf={book.shelf}                
-               />    
+                      <BookShelfManager
+                      updateBook={updateBook}
+                      theBook = {book}
+                      name = {book.title}
+                      shelf={book.shelf}                
+                      />    
                     </div>
                     <div className="book-title">{book.title}</div> 
                     <div className="book-authors">{book.authors}</div>
@@ -46,6 +46,8 @@ const BookShelf = ({ data, updateBook }) => {
               </ol>
             </div>
           </div>
+
+
           <div className="bookshelf">
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
@@ -116,6 +118,8 @@ const BookShelf = ({ data, updateBook }) => {
               </ol>
             </div>
           </div> 
+
+
         </div>
     </div>
     </>   

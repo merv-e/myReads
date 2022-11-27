@@ -10,18 +10,42 @@ const App = () => {
 
     const [data, setData] = useState([]);   
 
-      useEffect(()=> { 
-       const getData = async() => {
-         const res = await BooksAPI.getAll();
-         setData(res);
+  
+   const [currentlyReading, setCurrentlyReading] = useState([]);
+
+  const [wantToRead, setWantToRead] = useState(data.filter((book) => book.shelf === "wantToRead").map((book) => book));
+  
+  const [read, setRead] = useState(data.filter((book) => book.shelf === "read").map((book) => book));
+
+  const [notDisplayedInShelf, setNotDisplayedInShelf] = useState([]);
+  
+  useEffect(()=> { 
+    const getData = async() => {
+      const res = await BooksAPI.getAll();
+      setData(res);
+      // setCurrentlyReading(data.filter((book) => book.shelf === "currentlyReading").map((book) => book))
   //        console.log(res);
        };
        getData();
-     }, []);
+  // return eklememiz lazım yoksa devam ediyor.
 
-    const updateBook =(book, shelf) => { 
-      BooksAPI.update(book, shelf);
-    };
+     }, [data]);
+   
+
+const updateBook =(book, shelf) => { 
+  BooksAPI.update(book, shelf);
+      
+    if (shelf === "currentlyReading") setCurrentlyReading(currentlyReading.concat(book))
+    else if (shelf === "wantToRead") setWantToRead([...wantToRead, book])
+    else if (shelf === "read") setRead([...read, book])
+    else setNotDisplayedInShelf([...notDisplayedInShelf, book]);
+  };
+    
+    console.log(currentlyReading);
+    // console.log(read);
+    // console.log(wantToRead);
+    // console.log(notDisplayedInShelf);
+    
     
 
   return (
