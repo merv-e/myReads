@@ -8,46 +8,25 @@ const App = () => {
 
   const [showSearchPage, setShowSearchpage] = useState(false);
 
-    const [data, setData] = useState([]);   
+  const [data, setData] = useState([]);   
 
-  
-   const [currentlyReading, setCurrentlyReading] = useState([]);
-
-  const [wantToRead, setWantToRead] = useState(data.filter((book) => book.shelf === "wantToRead").map((book) => book));
-  
-  const [read, setRead] = useState(data.filter((book) => book.shelf === "read").map((book) => book));
-
-  const [notDisplayedInShelf, setNotDisplayedInShelf] = useState([]);
-  
   useEffect(()=> { 
-    const getData = async() => {
-      const res = await BooksAPI.getAll();
-      setData(res);
-      // setCurrentlyReading(data.filter((book) => book.shelf === "currentlyReading").map((book) => book))
-  //        console.log(res);
-       };
-       getData();
-  // return eklememiz lazım yoksa devam ediyor.
 
-     }, [data]);
-   
+    const getData = async() => {
+     
+      const res = await BooksAPI.getAll();
+          setData(res);
+          // console.log(res);
+        
+        // setCurrentlyReading(data.filter((book) => book.shelf === "currentlyReading").map((book) => book))
+      };
+           getData();
+     }, [data]); 
 
 const updateBook =(book, shelf) => { 
   BooksAPI.update(book, shelf);
-      
-    if (shelf === "currentlyReading") setCurrentlyReading(currentlyReading.concat(book))
-    else if (shelf === "wantToRead") setWantToRead([...wantToRead, book])
-    else if (shelf === "read") setRead([...read, book])
-    else setNotDisplayedInShelf([...notDisplayedInShelf, book]);
   };
     
-    console.log(currentlyReading);
-    // console.log(read);
-    // console.log(wantToRead);
-    // console.log(notDisplayedInShelf);
-    
-    
-
   return (
     <div className="app">
 
