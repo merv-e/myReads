@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import BookShelfManager from './BookShelfManager'
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 
 const BookShelf = ({ data, updateBook }) => {   
@@ -67,7 +68,6 @@ const BookShelf = ({ data, updateBook }) => {
                           `url(${book.imageLinks.smallThumbnail})`
                         }}
                       ></div>
-                      {/* {console.log(book)} */}
                       <BookShelfManager
                       updateBook={updateBook}
                       theBook = {book}
@@ -119,10 +119,14 @@ const BookShelf = ({ data, updateBook }) => {
             </div>
           </div> 
 
+              
+          <div className="open-search">    
+            <Link to="/search">Add a book</Link>
+          </div>
 
         </div>
-    </div>
-    </>   
+        </div>
+  </div>
   )
 }
 
