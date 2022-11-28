@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import BookShelfManager from './BookShelfManager'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 
-const BookShelf = ({ data, updateBook }) => {   
+const BookShelf = ({ data, updateBook, getBooks }) => {   
 
   return (
   <div className="list-books"> 
@@ -33,10 +33,12 @@ const BookShelf = ({ data, updateBook }) => {
                         }}
                       ></div>
                       <BookShelfManager
+                      id={book.id}
                       updateBook={updateBook}
                       theBook = {book}
                       name = {book.title}
-                      shelf={book.shelf}                
+                      shelf={book.shelf}
+                      getBooks={getBooks}                
                       />    
                     </div>
                     <div className="book-title">{book.title}</div> 

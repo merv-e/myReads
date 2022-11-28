@@ -17,11 +17,30 @@ const App = () => {
           // console.log(res);
       };
        getData();
-     }, [data]); 
+     }, [data]); // 
 
-    const updateBook =(book, shelf) => { 
+    const updateBook = (book, shelf) => { 
       BooksAPI.update(book, shelf);
     };
+
+    const [newSetOfBooks, setNewSetOfBooks] = useState([]);
+
+    const searchingBooks = (query, numberOfResults) => {
+    const search = async () => { 
+      const result =  await BooksAPI.search(query, numberOfResults);
+      setNewSetOfBooks(result);
+      console.log(newSetOfBooks);
+      console.log(result);
+    };
+    search();
+  };
+
+  // const getBooks = async (bookId) => {
+  //   await BooksAPI.get(bookId)
+  //   console.log(getBooks);
+  // };
+  // getBooks();
+  
     
     return (
       <div className="app">
@@ -32,6 +51,7 @@ const App = () => {
             <BookShelf 
               data = {data}
               updateBook={updateBook}
+              // getBooks={getBooks}
             />        
           }
           />
@@ -41,7 +61,10 @@ const App = () => {
           element = {
             <SearchBooks 
               data = {data}
-              updateBook={updateBook}         />
+              updateBook={updateBook}
+              onSearch={(query,numberOfResults) => searchingBooks(query, numberOfResults)} 
+              newSetOfBooks={newSetOfBooks}
+            />
           }
           />  
 
