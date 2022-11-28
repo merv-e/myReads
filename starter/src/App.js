@@ -9,38 +9,40 @@ import { Route, Routes } from "react-router-dom";
 const App = () => {
 
   const [data, setData] = useState([]);    
+  const [newSetOfBooks, setNewSetOfBooks] = useState([]);
 
   useEffect(()=> { 
     const getData = async() => {
       const res = await BooksAPI.getAll();
-          setData(res);
-          // console.log(res);
+        setData(res);
+        console.log(res);
       };
-       getData();
+      getData();
      }, [data]); // 
 
     const updateBook = (book, shelf) => { 
       BooksAPI.update(book, shelf);
     };
 
-    const [newSetOfBooks, setNewSetOfBooks] = useState([]);
-
     const searchingBooks = (query, numberOfResults) => {
-    const search = async () => { 
-      const result =  await BooksAPI.search(query, numberOfResults);
-      setNewSetOfBooks(result);
-      console.log(newSetOfBooks);
-      console.log(result);
-    };
-    search();
-  };
+      const search = async () => { 
+        const result =  await BooksAPI.search(query, numberOfResults);
+          setNewSetOfBooks(result);
+          console.log(newSetOfBooks);
+          console.log(result);
+        };
+        search();
+      };
 
-  // const getBooks = async (bookId) => {
-  //   await BooksAPI.get(bookId)
-  //   console.log(getBooks);
-  // };
-  // getBooks();
-  
+  const getBook = (bookId, shelf) => {
+    const x = async () => {
+    const res= await BooksAPI.get(bookId);
+    updateBook(res);
+    //  console.log(res);
+    //  console.log(shelf);
+    };
+    x();
+  };
     
     return (
       <div className="app">
@@ -51,7 +53,7 @@ const App = () => {
             <BookShelf 
               data = {data}
               updateBook={updateBook}
-              // getBooks={getBooks}
+              getBook={getBook}
             />        
           }
           />

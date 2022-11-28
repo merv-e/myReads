@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 
-const BookShelf = ({ data, updateBook, getBooks }) => {   
+const BookShelf = ({ data, updateBook, getBook }) => {   
 
   return (
   <div className="list-books"> 
@@ -38,7 +38,7 @@ const BookShelf = ({ data, updateBook, getBooks }) => {
                       theBook = {book}
                       name = {book.title}
                       shelf={book.shelf}
-                      getBooks={getBooks}                
+                      getBook={getBook}                
                       />    
                     </div>
                     <div className="book-title">{book.title}</div> 

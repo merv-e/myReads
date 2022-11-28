@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import * as BooksAPI from "../BooksAPI";
-const BookShelfManager = ({ updateBook, shelf, name, theBook, id, /* getBooks */}) => { 
+const BookShelfManager = ({ updateBook, shelf, name, theBook, id, getBook}) => { 
 
   const [whichShelf , setWhichShelf] = useState(shelf);
 
   const handleSelection = (e) => {
     setWhichShelf(e.target.value);
-    updateBook(theBook, e.target.value);/*  getBooks(id) */;
+    updateBook(theBook, e.target.value); 
+    // getBook(id, e.target.value);
   };
-  // const update = () => {
-   
-  //  };
-  
+
   return (
     <div className="book-shelf-changer">
         <select

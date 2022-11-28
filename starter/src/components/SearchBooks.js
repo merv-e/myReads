@@ -1,28 +1,28 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import BookShelfManager from './BookShelfManager';
-import serializeForm from 'form-serialize';
+// import serializeForm from 'form-serialize';
 
 const SearchBooks = ({ data, updateBook, onSearch, newSetOfBooks }) => {
 
-  const [text, setText] = useState("");
+  const [query, setQuery] = useState("");
 
   const searchBook =   
-    text === "" 
-    ? []
+    query === "" 
+    ? [] 
     : newSetOfBooks.filter((book) => 
-  book.title.toLowerCase().includes(text.toLowerCase()));
+  book.title.toLowerCase().includes(query.toLowerCase()));
 
   const handleInput = (event) => {
-    event.preventDefault(); // is this needed?
-    const books = serializeForm(event.target, {hash: true} );
-    // ev.tar.value da olabilir bu kısım.
+    setQuery(event.target.value);
+    // const books = serializeForm(event.target, {hash: true} );
 
     if (onSearch){
-      onSearch(books, 20);
+      onSearch(event.target.value, 20);
     };
-    console.log("books:", books)
+    // console.log("books:", query)
   };
+
 
   return (
     <div className="search-books">
@@ -32,14 +32,13 @@ const SearchBooks = ({ data, updateBook, onSearch, newSetOfBooks }) => {
             Close
             </Link>
             <div className="search-books-input-wrapper">
-            <form onSubmit={handleInput}>
               <input
                 type="text"
                 placeholder="Search by title, author, or ISBN"
-                value={text}
-                onInput= {(e) => setText(e.target.value)}
+                value={query}
+                onChange= {handleInput}
               />
-            </form>
+           {/* oninput da olabilir */}
             </div>
           </div>
           <div className="search-books-results">
@@ -59,6 +58,7 @@ const SearchBooks = ({ data, updateBook, onSearch, newSetOfBooks }) => {
                         }}
                       ></div>
                       <BookShelfManager
+                      id={book.id}
                       updateBook={updateBook}
                       theBook = {book}
                       name = {book.title}
