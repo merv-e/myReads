@@ -15,12 +15,9 @@ const SearchBooks = ({ data, updateBook, onSearch, newSetOfBooks }) => {
 
   const handleInput = (event) => {
     setQuery(event.target.value);
-    // const books = serializeForm(event.target, {hash: true} );
-
     if (onSearch){
       onSearch(event.target.value, 20);
     };
-    // console.log("books:", query)
   };
 
 
@@ -38,7 +35,6 @@ const SearchBooks = ({ data, updateBook, onSearch, newSetOfBooks }) => {
                 value={query}
                 onChange= {handleInput}
               />
-           {/* oninput da olabilir */}
             </div>
           </div>
           <div className="search-books-results">

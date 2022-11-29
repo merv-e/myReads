@@ -11,38 +11,40 @@ const App = () => {
   const [data, setData] = useState([]);    
   const [newSetOfBooks, setNewSetOfBooks] = useState([]);
 
-  useEffect(()=> { 
-    const getData = async() => {
-      const res = await BooksAPI.getAll();
-        setData(res);
-        console.log(res);
-      };
-      getData();
-     }, [data]); // 
-
     const updateBook = (book, shelf) => { 
       BooksAPI.update(book, shelf);
     };
 
-    const searchingBooks = (query, numberOfResults) => {
-      const search = async () => { 
-        const result =  await BooksAPI.search(query, numberOfResults);
-          setNewSetOfBooks(result);
-          console.log(newSetOfBooks);
-          console.log(result);
-        };
-        search();
-      };
-
-  const getBook = (bookId, shelf) => {
-    const x = async () => {
+    const getBook = (bookId, shelf) => {
+    const grabBook = async () => {
     const res= await BooksAPI.get(bookId);
-    updateBook(res);
-    //  console.log(res);
-    //  console.log(shelf);
+    updateBook(res, shelf);
+    console.log(res);
+    console.log(shelf);
     };
-    x();
+    // grabBook();
   };
+  
+  const searchingBooks = (query, numberOfResults) => {
+    const search = async () => { 
+      const result =  await BooksAPI.search(query, numberOfResults);
+        setNewSetOfBooks(result);
+        console.log(newSetOfBooks);
+        // console.log(result);
+      };
+      search();
+    };
+    
+    useEffect(()=> { 
+      const getData = async() => {
+        const res = await BooksAPI.getAll();
+        setData(res);
+        // console.log(res);
+      };
+      getData();
+    
+    // }
+  }, [data]); // 
     
     return (
       <div className="app">

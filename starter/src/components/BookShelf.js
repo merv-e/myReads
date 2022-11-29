@@ -34,6 +34,7 @@ const BookShelf = ({ data, updateBook, getBook }) => {
                       ></div>
                       <BookShelfManager
                       id={book.id}
+                      data = {data}
                       updateBook={updateBook}
                       theBook = {book}
                       name = {book.title}
