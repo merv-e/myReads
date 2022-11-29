@@ -8,43 +8,44 @@ import { Route, Routes } from "react-router-dom";
 
 const App = () => {
 
-  const [data, setData] = useState([]);    
+  // data comes with the API call will be stored here for the main page
+  const [data, setData] = useState([]);    
+
+  // data comes with the API call will be stored here for the search page
   const [newSetOfBooks, setNewSetOfBooks] = useState([]);
 
+  // book and shelf information will be transfered from child components which are BookShelf and SearchBooks.
     const updateBook = (book, shelf) => { 
       BooksAPI.update(book, shelf);
     };
+    
+    // when the user navigates to the search page and types a title it'll show the relevant books.
+    const searchingBooks = (query, numberOfResults) => {
+      const search = async () => { 
+        const result =  await BooksAPI.search(query, numberOfResults);
+          setNewSetOfBooks(result);
+          console.log(newSetOfBooks);
+          // console.log(result);
+        };
+        search();
+      };
 
+    //  bookId and shelf information will be transfered from child components.
     const getBook = (bookId, shelf) => {
-    const grabBook = async () => {
-    const res= await BooksAPI.get(bookId);
-    updateBook(res, shelf);
-    console.log(res);
-    console.log(shelf);
+      const grabBook = async () => {
+      const res= await BooksAPI.get(bookId);
+      // this call is made, so that after user searchs a book and is chosen to be on any shelf, it'll also update the book in backend.
+      updateBook(res, shelf);
     };
-    // grabBook();
   };
   
-  const searchingBooks = (query, numberOfResults) => {
-    const search = async () => { 
-      const result =  await BooksAPI.search(query, numberOfResults);
-        setNewSetOfBooks(result);
-        console.log(newSetOfBooks);
-        // console.log(result);
-      };
-      search();
-    };
-    
     useEffect(()=> { 
       const getData = async() => {
         const res = await BooksAPI.getAll();
         setData(res);
-        // console.log(res);
       };
       getData();
-    
-    // }
-  }, [data]); // 
+  }, [data]); 
     
     return (
       <div className="app">
