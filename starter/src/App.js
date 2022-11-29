@@ -39,6 +39,7 @@ const App = () => {
     };
   };
   
+  // cleanup must be added. Because the page re-renders continuously particularly with the getAll() and search() API calls.  
     useEffect(()=> { 
       const getData = async() => {
         const res = await BooksAPI.getAll();
