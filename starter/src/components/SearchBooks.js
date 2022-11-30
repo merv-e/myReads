@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BookShelfManager from './BookShelfManager';
 
@@ -16,12 +16,19 @@ const SearchBooks = ({ data, updateBook, onSearch, newSetOfBooks }) => {
 
   const handleInput = (event) => {
     // captures what user types to search a book.
-    setQuery(event.target.value);
+    // const handleSearch = setTimeout(()=> {
+      // useEffect(()=> {
+        setQuery(event.target.value);
+
+      // })
+
+    // })
 
     // this is where we also capture what user types and send it make the call to the API so that searchBook variable can filter the books for us.
     if (onSearch){
       onSearch(event.target.value, 20);
     };
+    
   };
 
 
