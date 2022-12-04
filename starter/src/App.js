@@ -10,32 +10,21 @@ const App = () => {
   // data comes with the API call will be stored here for the main page
   const [data, setData] = useState([]);    
 
-  // data comes with the API call will be stored here for the search page
-  const [newSetOfBooks, setNewSetOfBooks] = useState([]);
   
-  // cleanup must be added. Because the page re-renders continuously particularly with the getAll() and search() API calls.  
-  
-  
-    const getData =  useCallback(() => {
-     const x = async () => {
-        const res = await BooksAPI.getAll();
-        setData(res);
-        console.log(res);
-      };
-    }, [])   
+  useEffect((query, numberOfResults)=> { 
+    const getData = async () => {
+      const res = await BooksAPI.getAll();
+       setData(res);
+    };
+    // eger bookshelf managerdaki veri degisiyorsa... getData'yi cagir.
+  //  if(load) 
+     getData();
+    }, [data]);    
 
-  // when the user navigates to the search page and types a title it'll show the relevant books.
-  const searchingBooks = useCallback(() => {
-    const s =  (query, numberOfResults) => {
-      const search = async () => { 
-        const result = await BooksAPI.search(query, numberOfResults);
-        setNewSetOfBooks(result);
-        console.log(newSetOfBooks);
-        // console.log(result);
-       };
-     };
-   }, [newSetOfBooks]);
-
+    //data'yi dependency arr eklemezsek surekli render etmiyor. ancak cikarirsak da bu sefer kitap rafını değiştirdiğimizde anlık işlem yapmıyor ! :/ 
+    
+    // const searchingBooks = callForSearch();
+    
    // book and shelf information will be transfered from child components which are BookShelf and SearchBooks.
    const updateBook = (book, shelf) => { 
     BooksAPI.update(book, shelf);
@@ -50,17 +39,6 @@ const App = () => {
     updateBook(res, shelf);
   // };
 };
-      
-  useEffect(()=> { 
-    getData();
-    
-    const isUserSearching = setTimeout(()=> {
-      searchingBooks();
-    }, 3000);
-    return () => {
-      clearTimeout(searchingBooks());
-    }
-  }, [getData, searchingBooks ]); 
   
     return (
       <div className="app">
@@ -82,8 +60,9 @@ const App = () => {
             <SearchBooks 
               data = {data}
               updateBook={updateBook}
-              onSearch={(query,numberOfResults) => searchingBooks(query, numberOfResults)} 
-              newSetOfBooks={newSetOfBooks}
+              // onSearch={ searchingBooks} 
+              // onSearch={(query,numberOfResults) => searchingBooks(query, numberOfResults)} 
+              // newSetOfBooks={newSetOfBooks}
             />
           }
           />  
@@ -95,5 +74,6 @@ const App = () => {
 
 export default App;
 
-
 // get Book async ve await silince console.log'da aldığım hataları artık almıyorum. 
+
+//getBook hicbir yerde cagrilmiyor.
