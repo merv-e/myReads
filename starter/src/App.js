@@ -1,9 +1,10 @@
 import "./App.css";
 import { useCallback, useEffect, useState } from "react";
 import * as BooksAPI from "./BooksAPI";
-import BookShelf from "./components/BookShelf";
+// import BookShelf from "./components/BookShelf";
 import SearchBooks from "./components/SearchBooks";
 import { Route, Routes } from "react-router-dom";
+import Library from "./components/Library";
 
 const App = () => {
 
@@ -19,7 +20,8 @@ const App = () => {
     // eger bookshelf managerdaki veri degisiyorsa... getData'yi cagir.
   //  if(load) 
      getData();
-    }, [data]); //data    
+    }, [data]); //
+    // console.log(data);     
 
     //data'yi dependency arr eklemezsek surekli render etmiyor. ancak cikarirsak da bu sefer kitap rafını değiştirdiğimizde anlık işlem yapmıyor ! :/ 
     
@@ -44,7 +46,7 @@ const App = () => {
           <Route 
           exact path="/"
           element={
-            <BookShelf 
+            <Library 
               data = {data}
               updateBook={updateBook}
               // getBook={getBook}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 const BookShelfManager = ({ updateBook, shelf, name, theBook, id, getBook, data, getData, newSetOfBooks, handleChange}) => { 
 
   //which shelf the book is on the main page
@@ -6,7 +6,6 @@ const BookShelfManager = ({ updateBook, shelf, name, theBook, id, getBook, data,
 
   //which shelf the book is on the search page
   // const [whichShelfSearchPg, setWhichShelfSearchPg] = useState("None");
-
 
   const handleSelection = (e) => {
     setWhichShelf(e.target.value);

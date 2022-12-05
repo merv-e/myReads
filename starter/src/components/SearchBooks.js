@@ -34,7 +34,7 @@ const SearchBooks = ({ data, updateBook }) => {
       const result = await BooksAPI.search(query, 20);
       // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
       setNewSetOfBooks(result);
-      console.log(newSetOfBooks);
+      // console.log(newSetOfBooks);
     }
     const limit = setTimeout(()=> {
         search();
@@ -42,7 +42,7 @@ const SearchBooks = ({ data, updateBook }) => {
 
   return () => {
     clearTimeout(limit);
-    console.log("cleanup");
+    // console.log("cleanup");
   }
 }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmıyor!
 
