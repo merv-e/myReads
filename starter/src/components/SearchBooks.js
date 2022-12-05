@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import BookShelfManager from './BookShelfManager';
+import Books from './Books';
 import * as BooksAPI from "../BooksAPI";
 
 const SearchBooks = ({ data, updateBook }) => {
@@ -63,7 +63,19 @@ const SearchBooks = ({ data, updateBook }) => {
             </div>
           </div>
           <div className="search-books-results">
-            <ol className="books-grid">
+            <Books 
+              searchBook={searchBook}
+              newSetOfBooks={newSetOfBooks}
+            /> 
+          </div>
+        </div>
+  )
+}
+
+export default SearchBooks
+
+/* 
+ <ol className="books-grid">
               {
                 searchBook === null 
                 ? 
@@ -99,9 +111,4 @@ const SearchBooks = ({ data, updateBook }) => {
                 )
               }
             </ol>
-          </div>
-        </div>
-  )
-}
-
-export default SearchBooks
+*/

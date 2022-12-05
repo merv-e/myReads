@@ -1,7 +1,7 @@
 import React from 'react';
 import Book from './Book';
 
-const Books = ({data, updateBook, shelf}) => {
+const Books = ({data, updateBook, shelf, newSetOfBooks, searchBook}) => {
   return (
     <ol className="books-grid"> 
           {
