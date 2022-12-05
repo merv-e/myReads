@@ -1,7 +1,7 @@
 import React from 'react'
 import BookShelfManager from './BookShelfManager'
 
-const Book = ({id, title, shelf,  updateBook, authors, url, theBook}) => {
+const Book = ({id, title, shelf,  updateBook, authors, url, theBook, urlWithThumbnail}) => {
 
   return (
  <>
@@ -14,8 +14,9 @@ const Book = ({id, title, shelf,  updateBook, authors, url, theBook}) => {
              width: 128,
              height: 193,
              backgroundImage:
-              `url(${url})`
+              `url(${urlWithThumbnail})` 
              }}
+              // || `url(${urlWithThumbnail})` 
            ></div>
            <BookShelfManager
            id={id}
@@ -26,7 +27,8 @@ const Book = ({id, title, shelf,  updateBook, authors, url, theBook}) => {
            />    
          </div>
          <div className="book-title">{title}</div> 
-         <div className="book-authors">{authors}</div> 
+         <div className="book-authors">{authors }</div> 
+          {/* && authors.join(", ") */}
          
        </div>
      </li>   

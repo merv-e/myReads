@@ -63,10 +63,15 @@ const SearchBooks = ({ data, updateBook }) => {
             </div>
           </div>
           <div className="search-books-results">
+          {/* Books'da ol kısmını Shelf'e taşımamız lazım! */}
+          {searchBook.map(book => (
             <Books 
-              searchBook={searchBook}
+              key={book.id}
               newSetOfBooks={newSetOfBooks}
+              shelf={book.shelf ? book.shelf: "none"}
             /> 
+          ))
+          }
           </div>
         </div>
   )

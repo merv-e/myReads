@@ -1,7 +1,7 @@
 import React from 'react';
 import Book from './Book';
 
-const Books = ({data, updateBook, shelf, newSetOfBooks, searchBook}) => {
+const Books = ({data, updateBook, shelf, newSetOfBooks, }) => {
   return (
     <ol className="books-grid"> 
           {
@@ -12,8 +12,9 @@ const Books = ({data, updateBook, shelf, newSetOfBooks, searchBook}) => {
               id={book.id} 
               title={book.title} 
               shelf={book.shelf}
-              authors={book.authors.join(", ")}
-              url = {book.imageLinks.smallThumbnail}
+              authors={book.authors}
+              urlWithThumbnail= {book.imageLinks.smallThumbnail }
+            //   url = {book.imageLinks }
               theBook ={book}
               updateBook={updateBook} />
             ))
