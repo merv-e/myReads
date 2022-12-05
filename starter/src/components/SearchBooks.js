@@ -18,19 +18,23 @@ const SearchBooks = ({ data, updateBook }) => {
     ? [] 
     : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
-    // || book.authors[0].toLowerCase().includes(query.toLowerCase())  
+    || book.authors[0].toLowerCase().includes(query.toLowerCase())  
     // || book.authors[1].toLowerCase().includes(query.toLowerCase())
     // ||book.industryIdentifiers[0].idendifier.includes(query)
     // || book.industryIdentifiers[1].idendifier.includes(query)
     );
     
+    const handleChange = (e) => {
+      setQuery(e.target.value);
+    }; 
+
   useEffect(()=> {
   // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
     const search = async () => { 
       const result = await BooksAPI.search(query, 20);
       // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
-        setNewSetOfBooks(result);
-        console.log(newSetOfBooks);
+      setNewSetOfBooks(result);
+      console.log(newSetOfBooks);
     }
     const limit = setTimeout(()=> {
         search();
@@ -54,13 +58,17 @@ const SearchBooks = ({ data, updateBook }) => {
                 type="text"
                 placeholder="Search by title, author, or ISBN"
                 value={query}
-                onChange= {(e) => setQuery(e.target.value)}
+                onChange= {handleChange}
               />
             </div>
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
               {
+                searchBook === null 
+                ? 
+              <li> No book has been found </li> 
+                : 
                 searchBook.map(book =>
                   <li key={book.id}>
                   <div className="book">
@@ -79,7 +87,9 @@ const SearchBooks = ({ data, updateBook }) => {
                       updateBook={updateBook}
                       theBook = {book}
                       name = {book.title}
-                      shelf={book.shelf}                
+                      shelf="none"
+                      // newSetOfBooks={newSetOfBooks}  
+                      // handleChange={handleChange}              
                       />    
                     </div>
                     <div className="book-title">{book.title}</div> 
