@@ -14,7 +14,7 @@ const SearchBooks = ({ data, updateBook }) => {
   // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchBook variable will filter it accordingly.
  
   const searchBook =   
-    query === "" 
+    query === "" || query.length === 0
     ? [] 
     : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
@@ -42,20 +42,17 @@ const SearchBooks = ({ data, updateBook }) => {
           setTimeout(()=> {
             search();
         }, 2000);
-        
         console.log("searching");
+         // }
         
         return () => {
             clearTimeout(limit);
             console.log("cleanup");
         }
       
-      // }
+     
     }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmıyor!
     
-    
-  // const stop = () => {
-  // };
 
   return (
     <div className="search-books">
