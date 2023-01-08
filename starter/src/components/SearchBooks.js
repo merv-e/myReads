@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Books from './Books';
+import Book from './Books';
 import * as BooksAPI from "../BooksAPI";
 
 const SearchBooks = ({ data, updateBook }) => {
@@ -25,26 +25,37 @@ const SearchBooks = ({ data, updateBook }) => {
     );
     
     const handleChange = (e) => {
-      setQuery(e.target.value);
-    }; 
+        setQuery(e.target.value);
+      };  
 
-  useEffect(()=> {
-  // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
-    const search = async () => { 
-      const result = await BooksAPI.search(query, 20);
-      // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
-      setNewSetOfBooks(result);
-      // console.log(newSetOfBooks);
-    }
-    const limit = setTimeout(()=> {
-        search();
-      }, 3000);
+    useEffect(()=> {
+      // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
+      const search = async () => { 
+        const result = await BooksAPI.search(query, 20).then(book => setNewSetOfBooks(book));
+        // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
+       
+        // console.log(newSetOfBooks);
+      };
 
-  return () => {
-    clearTimeout(limit);
-    // console.log("cleanup");
-  }
-}, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmıyor!
+      const limit =
+      //() => {
+          setTimeout(()=> {
+            search();
+        }, 2000);
+        
+        console.log("searching");
+        
+        return () => {
+            clearTimeout(limit);
+            console.log("cleanup");
+        }
+      
+      // }
+    }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmıyor!
+    
+    
+  // const stop = () => {
+  // };
 
   return (
     <div className="search-books">
@@ -64,14 +75,22 @@ const SearchBooks = ({ data, updateBook }) => {
           </div>
           <div className="search-books-results">
           {/* Books'da ol kısmını Shelf'e taşımamız lazım! */}
+          <ol className="books-grid"> 
           {searchBook.map(book => (
-            <Books 
+            <Book 
               key={book.id}
-              newSetOfBooks={newSetOfBooks}
-              shelf={book.shelf ? book.shelf: "none"}
+              // id = {book.id}
+              shelf={book.shelf ? book.shelf : "none"}
+              title = {book.title}
+              authors = {book.authors}
+              url={book.imageLinks.smallThumbnail }
+              book = {book}
+              searchBook = {searchBook}
+              updateBook = {updateBook}
             /> 
           ))
           }
+          </ol>
           </div>
         </div>
   )

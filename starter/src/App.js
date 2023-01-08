@@ -13,6 +13,8 @@ const App = () => {
   const getData = async () => {
     const res = await BooksAPI.getAll();
      setData(res);
+/* YUKARIDAKINI SILIP SUNU BI DENEYELIM */
+    //  .then(books => setData(books));
     };
   
   useEffect(()=> { 

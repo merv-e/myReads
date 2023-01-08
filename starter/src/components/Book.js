@@ -1,9 +1,9 @@
 import React from 'react'
 import BookShelfManager from './BookShelfManager'
 
-const Book = ({id, title, shelf,  updateBook, authors, url, theBook, urlWithThumbnail}) => {
+const Book = ({id, title, shelf,  updateBook, authors, url, theBook}) => {
 
-  return (
+return (
  <>
      <li key={id}>
        <div className="book">
@@ -14,22 +14,23 @@ const Book = ({id, title, shelf,  updateBook, authors, url, theBook, urlWithThum
              width: 128,
              height: 193,
              backgroundImage:
-              `url(${urlWithThumbnail})` 
+              `url(${url})` 
              }}
               // || `url(${urlWithThumbnail})` 
            ></div>
            <BookShelfManager
-           id={id}
+          //  id={id}
            updateBook={updateBook}
-           theBook = {theBook}
-           name = {title}
+           book = {theBook}
+           title = {title}
            shelf={shelf}
            />    
          </div>
          <div className="book-title">{title}</div> 
          <div className="book-authors">{authors }</div> 
           {/* && authors.join(", ") */}
-         
+
+         {/* {console.log(title)} */}
        </div>
      </li>   
     </>

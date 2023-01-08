@@ -1,5 +1,5 @@
 import React from 'react'
-import Books from './Books';
+import Book from './Books';
 
 const Shelves = ({shelf, nameOfTheShelf, data, updateBook, getBook}) => {
   
@@ -40,11 +40,21 @@ const Shelves = ({shelf, nameOfTheShelf, data, updateBook, getBook}) => {
     <div className="bookshelf">
         <h2 className="bookshelf-title">{nameOfTheShelf}</h2>
         <div className="bookshelf-books">
-          <Books 
-            updateBook={updateBook}
-            data={data} 
-            shelf={shelf}
-          /> 
+          <ol className="books-grid">
+         {data.filter(book =>
+            <Book 
+              data={data} 
+              key={book.id}
+              // id = {book.id}
+              shelf={shelf}
+              title = {book.title}
+              authors = {book.authors}
+              url={book.imageLinks.smallThumbnail }
+              book = {book}
+              updateBook={updateBook}
+            />  
+        )}
+          </ol>
         </div>
     </div>
   )
