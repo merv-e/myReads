@@ -71,7 +71,6 @@ const SearchBooks = ({ data, updateBook }) => {
             </div>
           </div>
           <div className="search-books-results">
-          {/* Books'da ol kısmını Shelf'e taşımamız lazım! */}
           <ol className="books-grid"> 
           {searchBook.map(book => (
             <Book 
@@ -94,42 +93,3 @@ const SearchBooks = ({ data, updateBook }) => {
 }
 
 export default SearchBooks
-
-/* 
- <ol className="books-grid">
-              {
-                searchBook === null 
-                ? 
-              <li> No book has been found </li> 
-                : 
-                searchBook.map(book =>
-                  <li key={book.id}>
-                  <div className="book">
-                    <div className="book-top">
-                      <div
-                        className="book-cover"
-                        style={{
-                          width: 128,
-                          height: 193,
-                          backgroundImage:
-                            `url(${book.imageLinks.smallThumbnail})`
-                        }}
-                      ></div>
-                      <BookShelfManager
-                      id={book.id}
-                      updateBook={updateBook}
-                      theBook = {book}
-                      name = {book.title}
-                      shelf="none"
-                      // newSetOfBooks={newSetOfBooks}  
-                      // handleChange={handleChange}              
-                      />    
-                    </div>
-                    <div className="book-title">{book.title}</div> 
-                    <div className="book-authors">{book.authors}</div>
-                  </div>
-                </li>  
-                )
-              }
-            </ol>
-*/
