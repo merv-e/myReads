@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Book from './Books';
+import Book from './Book';
 import * as BooksAPI from "../BooksAPI";
 
 const SearchBooks = ({ data, updateBook }) => {

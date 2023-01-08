@@ -1,5 +1,5 @@
 import React from 'react'
-import Book from './Books';
+import Book from './Book';
 
 const Shelves = ({shelf, nameOfTheShelf, data, updateBook, getBook}) => {
   
