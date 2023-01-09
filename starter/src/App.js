@@ -42,6 +42,7 @@ const App = () => {
     const res=  BooksAPI.get(bookId); 
     // this call is made, so that after user searchs a book and is chosen to be on any shelf, it'll also update the book in backend.
     updateBook(res, shelf);
+
 };
   
     return (
@@ -65,7 +66,7 @@ const App = () => {
               data = {data}
               updateBook={updateBook}
               getBook={getBook}
-              getData={getData}
+              // getData={getData}
             />
           }
           />  

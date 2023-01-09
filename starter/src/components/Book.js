@@ -24,7 +24,7 @@ return (
            updateBook={updateBook}
            book = {book}
            title = {title}
-           shelf={shelf}
+           shelf={shelf ? shelf : "none"}
            getBook ={getBook}
            />    
          </div>

@@ -41,7 +41,7 @@ const SearchBooks = ({ data, updateBook }) => {
       //() => {
           setTimeout(()=> {
             search();
-        }, 2000);
+        }, 3000);
         console.log("searching");
          // }
         
@@ -74,7 +74,9 @@ const SearchBooks = ({ data, updateBook }) => {
             <Book 
               key={book.id}
               id = {book.id}
-              shelf={book.shelf ? book.shelf : "none"}
+              // shelf= {
+              // book.shelf
+              //   }
               title = {book.title}
               authors = {book.authors}
               url={book.imageLinks.smallThumbnail }

@@ -20,7 +20,7 @@ const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  
     updateBook(book, e.target.value); 
     // console.log(e.target.value);
     // console.log(whichShelf);
-    // getBook(book, e.target.value);
+    getBook(id, e.target.value);
   };
   
   // newSetOfBooks.forEach((book, e) => { book.id === id ? setWhichShelf(e.target.value) : setWhichShelf("None");
