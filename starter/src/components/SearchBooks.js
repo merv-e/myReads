@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Book from './Book';
 import * as BooksAPI from "../BooksAPI";
+import SearchedBooksWithShelfInfo from './SearchedBooksWithShelfInfo';
 
-const SearchBooks = ({ data, updateBook }) => {
+const SearchBooks = ({ data, updateBook, getBook }) => {
 
   const [query, setQuery] = useState("");
   // const [loading, setLoading] = useState();
@@ -51,7 +51,6 @@ const SearchBooks = ({ data, updateBook }) => {
         }
     }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmıyor!
     
-
   return (
     <div className="search-books">
           <div className="search-books-bar">  
@@ -69,24 +68,14 @@ const SearchBooks = ({ data, updateBook }) => {
             </div>
           </div>
           <div className="search-books-results">
-          <ol className="books-grid"> 
-          {searchBook.map(book => (
-            <Book 
-              key={book.id}
-              id = {book.id}
-              // shelf= {
-              // book.shelf
-              //   }
-              title = {book.title}
-              authors = {book.authors}
-              url={book.imageLinks.smallThumbnail }
-              book = {book}
-              searchBook = {searchBook}
-              updateBook = {updateBook}
-            /> 
-          ))
-          }
-          </ol>
+         
+         <SearchedBooksWithShelfInfo 
+          searchBook={ searchBook}
+          data = {data}
+          updateBook = {updateBook}
+          getBook = {getBook}
+         
+         />
           </div>
         </div>
   )

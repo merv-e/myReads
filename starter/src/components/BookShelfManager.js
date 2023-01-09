@@ -3,29 +3,21 @@ import React, {  useState } from 'react';
 const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  newSetOfBooks, handleChange }) => { 
 
   // getData 
-// console.log(title, shelf);
-  
+
   //which shelf the book is on the main page
   const [whichShelf , setWhichShelf] = useState(shelf);
 
-  //which shelf the book is on the search page
-  // const [whichShelfSearchPg, setWhichShelfSearchPg] = useState("None");
 
   const handleSelection = (e) => {
     // console.log(whichShelf);
     // console.log(e.target.value);
-
     setWhichShelf(e.target.value);
-
     updateBook(book, e.target.value); 
     // console.log(e.target.value);
     // console.log(whichShelf);
     getBook(id, e.target.value);
   };
   
-  // newSetOfBooks.forEach((book, e) => { book.id === id ? setWhichShelf(e.target.value) : setWhichShelf("None");
-  // });
-
   return (
     <div className="book-shelf-changer">
         <select
@@ -35,7 +27,7 @@ const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  
           id={id}
           name={title}
           onChange={ handleSelection } >
-         <option value="none" disabled >Move to...</option>
+         <option value="moveTo" disabled >Move to...</option>
          <option value="currentlyReading">Currently Reading</option>
          <option value="wantToRead">Want to Read</option>
          <option value="read">Read</option>
