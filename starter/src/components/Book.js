@@ -1,7 +1,7 @@
 import React from 'react'
 import BookShelfManager from './BookShelfManager'
 
-const Book = ({id, title, shelf,  updateBook, authors, url, theBook, getBook}) => {
+const Book = ({id, title, shelf,  updateBook, authors, url, book, getBook}) => {
 
 return (
  <>
@@ -22,7 +22,7 @@ return (
            key={id}
            id={id}
            updateBook={updateBook}
-           book = {theBook}
+           book = {book}
            title = {title}
            shelf={shelf}
            getBook ={getBook}

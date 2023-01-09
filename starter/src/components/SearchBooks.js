@@ -73,7 +73,7 @@ const SearchBooks = ({ data, updateBook }) => {
           {searchBook.map(book => (
             <Book 
               key={book.id}
-              // id = {book.id}
+              id = {book.id}
               shelf={book.shelf ? book.shelf : "none"}
               title = {book.title}
               authors = {book.authors}

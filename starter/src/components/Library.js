@@ -10,12 +10,8 @@ const Library = ({ data, updateBook, getBook }) => {
     {shelf: "currentlyReading", name: "Currently Reading" },
     {shelf: "wantToRead" , name: "Want To Read"},
     {shelf:"read", name: "Read"},
-    // {shelf:"none" ,name: "None"}
+    {shelf:"none", name: "None"}
   ];
-
-  // const generateId = () => {
-
-  // }
 
   return (
   <div className="list-books"> 
@@ -25,10 +21,11 @@ const Library = ({ data, updateBook, getBook }) => {
     <div className="list-books-content"> 
       <div>
         {
-        shelfName.map((info, index) => (
+        shelfName.filter(shelfName => shelfName.shelf !== "none")
+        .map((info, index) => (
           <Shelves 
           key = {index}
-          shelf={info.shelf}
+          shelfNamesImmutable={info.shelf}
           nameOfTheShelf = {info.name}
           data={data} 
           updateBook={updateBook}

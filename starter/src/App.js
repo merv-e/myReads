@@ -31,7 +31,9 @@ const App = () => {
   
    const updateBook = (book, shelf) => { 
     BooksAPI.update(book, shelf);
-    getData();
+   
+    // getData(); // bu nereden cikti islevsel mi hicbir fikrim yok :/ 
+
   };
   
 
@@ -61,12 +63,9 @@ const App = () => {
           element = {
             <SearchBooks 
               data = {data}
-              updateBook={updateBook}
+              updateBook={() => updateBook()}
               getBook={getBook}
               getData={getData}
-              // onSearch={ searchingBooks} 
-              // onSearch={(query,numberOfResults) => searchingBooks(query, numberOfResults)} 
-              // newSetOfBooks={newSetOfBooks}
             />
           }
           />  

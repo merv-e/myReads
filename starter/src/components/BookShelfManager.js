@@ -1,10 +1,9 @@
 import React, {  useState } from 'react';
 
-
 const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  newSetOfBooks, handleChange }) => { 
 
   // getData 
-
+// console.log(title, shelf);
   
   //which shelf the book is on the main page
   const [whichShelf , setWhichShelf] = useState(shelf);
@@ -13,9 +12,15 @@ const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  
   // const [whichShelfSearchPg, setWhichShelfSearchPg] = useState("None");
 
   const handleSelection = (e) => {
+    // console.log(whichShelf);
+    // console.log(e.target.value);
+
     setWhichShelf(e.target.value);
+
     updateBook(book, e.target.value); 
-    getBook(book, e.target.value);
+    // console.log(e.target.value);
+    // console.log(whichShelf);
+    // getBook(book, e.target.value);
   };
   
   // newSetOfBooks.forEach((book, e) => { book.id === id ? setWhichShelf(e.target.value) : setWhichShelf("None");

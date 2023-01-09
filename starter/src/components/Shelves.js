@@ -1,7 +1,7 @@
 import React from 'react'
 import Book from './Book';
 
-const Shelves = ({shelf, nameOfTheShelf, data, updateBook, getBook}) => {
+const Shelves = ({shelfNamesImmutable, nameOfTheShelf, data, updateBook, getBook}) => {
   
 
     // const [currentlyReading, setCurrentlyReading] = useState(data.filter((book) => book.shelf === "currentlyReading"));
@@ -42,19 +42,19 @@ const Shelves = ({shelf, nameOfTheShelf, data, updateBook, getBook}) => {
         <div className="bookshelf-books">
           <ol className="books-grid">
           {
-          data.filter(book => book.shelf === shelf)
+          data.filter(book => book.shelf === shelfNamesImmutable)
           .map(book => 
             <Book 
               data={data} 
               key={book.id}
               id = {book.id}
-              shelf={book.shelf === shelf}
+              shelf={book.shelf}
               title = {book.title}
               authors = {book.authors}
               url={book.imageLinks.smallThumbnail }
               book = {book}
               updateBook={updateBook}
-              getBook = {getBook}
+              // getBook = {getBook}
             />  
         )}
           </ol>
