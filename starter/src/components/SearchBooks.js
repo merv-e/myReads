@@ -49,8 +49,6 @@ const SearchBooks = ({ data, updateBook }) => {
             clearTimeout(limit);
             console.log("cleanup");
         }
-      
-     
     }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmıyor!
     
 

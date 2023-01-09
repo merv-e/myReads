@@ -28,9 +28,10 @@ const App = () => {
     
     
    // book and shelf information will be transfered from child components which are BookShelf and SearchBooks.   
+  
    const updateBook = (book, shelf) => { 
     BooksAPI.update(book, shelf);
-    // getData();
+    getData();
   };
   
 

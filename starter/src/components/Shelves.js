@@ -41,17 +41,20 @@ const Shelves = ({shelf, nameOfTheShelf, data, updateBook, getBook}) => {
         <h2 className="bookshelf-title">{nameOfTheShelf}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-         {data.filter(book =>
+          {
+          data.filter(book => book.shelf === shelf)
+          .map(book => 
             <Book 
               data={data} 
               key={book.id}
-              // id = {book.id}
-              shelf={shelf}
+              id = {book.id}
+              shelf={book.shelf === shelf}
               title = {book.title}
               authors = {book.authors}
               url={book.imageLinks.smallThumbnail }
               book = {book}
               updateBook={updateBook}
+              getBook = {getBook}
             />  
         )}
           </ol>

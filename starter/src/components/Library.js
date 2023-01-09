@@ -9,7 +9,7 @@ const Library = ({ data, updateBook, getBook }) => {
   const shelfName = [
     {shelf: "currentlyReading", name: "Currently Reading" },
     {shelf: "wantToRead" , name: "Want To Read"},
-    {shelf:"read", name: "Read"}
+    {shelf:"read", name: "Read"},
     // {shelf:"none" ,name: "None"}
   ];
 
@@ -32,6 +32,7 @@ const Library = ({ data, updateBook, getBook }) => {
           nameOfTheShelf = {info.name}
           data={data} 
           updateBook={updateBook}
+          getBook = {getBook}
           />
         ))
         }
@@ -47,7 +48,7 @@ const Library = ({ data, updateBook, getBook }) => {
 
 Library.propTypes = {
   data :  PropTypes.array.isRequired,
-  // updateBook :  PropTypes.func.isRequired
+  updateBook :  PropTypes.func.isRequired
 }
 
 export default Library
