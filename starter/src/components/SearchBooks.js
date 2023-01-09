@@ -14,7 +14,7 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
   // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchBook variable will filter it accordingly.
  
   const searchBook =   
-    query === "" || query.length === 0
+    query === ""// || query.length === 0
     ? [] 
     : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
@@ -32,24 +32,21 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
       // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
       const search = async () => { 
         const result = await BooksAPI.search(query, 20).then(book => setNewSetOfBooks(book));
+     
         // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
-       
-        // console.log(newSetOfBooks);
+ 
       };
 
-      const limit =
-      //() => {
-          setTimeout(()=> {
-            search();
-        }, 3000);
+      const limit = setTimeout(()=> {
+        search();
         console.log("searching");
-         // }
+      }, 3000);
         
         return () => {
             clearTimeout(limit);
             console.log("cleanup");
         }
-    }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmıyor!
+    }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmiyor!
     
   return (
     <div className="search-books">
@@ -74,7 +71,6 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
           data = {data}
           updateBook = {updateBook}
           getBook = {getBook}
-         
          />
           </div>
         </div>
