@@ -63,7 +63,7 @@ const App = () => {
           element = {
             <SearchBooks 
               data = {data}
-              updateBook={() => updateBook()}
+              updateBook={updateBook}
               getBook={getBook}
               getData={getData}
             />
