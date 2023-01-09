@@ -32,7 +32,6 @@ return (
          <div className="book-authors">{authors }</div> 
           {/* && authors.join(", ") */}
 
-         {/* {console.log(title)} */}
        </div>
      </li>   
     </>
