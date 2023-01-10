@@ -18,7 +18,12 @@ const Shelves = ({shelfNamesImmutable, nameOfTheShelf, data, updateBook, getBook
               shelf={book.shelf}
               title = {book.title}
               authors = {book.authors}
-              url={book.imageLinks.smallThumbnail || book.imageLinks.thumbnail }
+              url={
+                book.imageLinks 
+                ? book.imageLinks.thumbnail 
+                : book.imageLinks.smallThumbnail
+                // book.imageLinks.smallThumbnail || book.imageLinks.thumbnail 
+                }
               book = {book}
               updateBook={updateBook}
               getBook = {getBook}

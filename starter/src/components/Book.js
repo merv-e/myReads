@@ -15,7 +15,6 @@ return (
              height: 193,
              backgroundImage:
               `url(${url})` 
-              // || `url(${urlWithThumbnail})` 
              }}
            ></div>
            <BookShelfManager
@@ -23,7 +22,7 @@ return (
            id={id}
            updateBook={updateBook}
            book = {book}
-           title = {title}
+           title = {book.title}
            shelf={shelf}
            getBook ={getBook}
            />    

@@ -29,9 +29,9 @@ const SearchedBooksWithShelfInfo = ({searchBook, data, updateBook, getBook, id, 
               title = {book.title}
               authors = {book.authors}
               url={
-                book.imageLinks.smallThumbnail || book.imageLinks.thumbnail
-                // ? book.imageLinks.smallThumbnail  
-                // : book.imageLinks.thumbnail
+                book.imageLinks 
+                ? book.imageLinks.thumbnail 
+                : book.imageLinks.smallThumbnail
                 }
               book = {book}
               searchBook = {searchBook}
