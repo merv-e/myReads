@@ -18,6 +18,7 @@ There are two pages : Main page and search page. In the main page, you can find 
 - You can search for books (please note that the search is limited by some keywords) and add/change the book to any shelf that is on the main page.
 
 ![Search Page](./src/screenshots/search-page.jpg)
+
   -------------------------
 <br>
 
@@ -37,5 +38,5 @@ To launch the project
 npm start
 ```
 
- This project is the first project in [Udacity's SENIOR FRONT END ENGINEER - OLX SCHOLARSHIP Course](https://www.udacity.com/course/react-nanodegree--nd019?utm_source=gsem_brand&utm_medium=ads_r&utm_campaign=18832262637_c_individuals&utm_term=144907204204&utm_keyword=udacity%20react_e&gclid=EAIaIQobChMIp52Al6K9_AIVBI9oCR3oagoOEAAYASAAEgI3CvD_BwE). <br> Note that the link above is for another course in Udacity that is pretty similar to the one I've taken.
+ This project is the first project in Udacity's Senior Front End Engineer - OLX Scholarship Course.
 
