@@ -9,20 +9,14 @@ const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  
 
 
   const handleSelection = (e) => {
-    // console.log(whichShelf);
-    // console.log(e.target.value);
     setWhichShelf(e.target.value);
     updateBook(book, e.target.value); 
-    // console.log(e.target.value);
-    // console.log(whichShelf);
-    getBook(id, e.target.value);
+    // getBook(id, e.target.value);
   };
   
   return (
     <div className="book-shelf-changer">
         <select
-        // right now "value" (below) correctly updates the books in the main page. 
-        //In the search page, when the user choses any book, that moment, it updates that book's shelf, adds it to the main page to the correct shelf. However, if the user navigates to another page and search the same book again, it doesn't correctly show which shelf the book is on.
           value={whichShelf}
           id={id}
           name={title}

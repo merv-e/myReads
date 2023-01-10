@@ -14,7 +14,7 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
   // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchBook variable will filter it accordingly.
  
   const searchBook =   
-    query.length >=1 // || query.length === 0
+    query.length >=1 // || query === "" // query.length === 0
     ? newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
     || book.authors[0].toLowerCase().includes(query.toLowerCase())  
@@ -22,7 +22,9 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
     // ||book.industryIdentifiers[0].idendifier.includes(query)
     // || book.industryIdentifiers[1].idendifier.includes(query)
     )
-    : [] ;
+    : [] 
+    // ? alert("Please search for something ")
+    // : []; //[] ;
     
     const handleChange = (e) => {
         setQuery(e.target.value);

@@ -22,6 +22,8 @@ const App = () => {
   //  if(load) 
      getData();
     }, [data]); //
+    // not: contacts.app'de contacts'i dependency arr. yazilmamis
+
     // console.log(data);     
 
     //data'yi dependency arr eklemezsek surekli render etmiyor. ancak cikarirsak da bu sefer kitap rafını değiştirdiğimizde anlık işlem yapmıyor ! :/ 
@@ -35,6 +37,7 @@ const App = () => {
   };
   
 
+  ///// ??????
   //  bookId and shelf information will be transfered from child components.
   const getBook = (bookId, shelf) => {
     const res=  BooksAPI.get(bookId); 
