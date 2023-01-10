@@ -40,12 +40,11 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
       };
 
       const limit = setTimeout(()=> {
-        // if(query.length >=1) {
           search();
           console.log("searching");
-        // }
-      }, 5000);
+        }, 5000);
         
+       
         return () => {
             clearTimeout(limit);
             console.log("cleanup");
@@ -69,6 +68,10 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
             </div>
           </div>
           <div className="search-books-results">
+         {/* kosullu olarak ya loading gelecek ya da kitaplar :)*/}
+         {/* { 
+          <h1>LOADING</h1> 
+         }  */}
          
          <SearchedBooksWithShelfInfo 
           searchBook={ searchBook}

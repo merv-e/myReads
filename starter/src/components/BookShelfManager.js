@@ -7,7 +7,6 @@ const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  
   //which shelf the book is on the main page
   const [whichShelf , setWhichShelf] = useState(shelf);
 
-
   const handleSelection = (e) => {
     setWhichShelf(e.target.value);
     updateBook(book, e.target.value); 
