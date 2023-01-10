@@ -37,10 +37,10 @@ const App = () => {
   };
   
   //  bookId and shelf information will be transfered from child components.  
-  //    const getBook = (bookId, shelf) => {
-    //      const res=  BooksAPI.get(bookId);
-    // updateBook(res, shelf);
-// };
+     const getBook = (bookId, shelf) => {
+         const res=  BooksAPI.get(bookId);
+    updateBook(res, shelf);
+};
 
     // this call is made (getBook), so that after user searchs a book and is chosen to be on any shelf, it'll also update the book in backend.
     

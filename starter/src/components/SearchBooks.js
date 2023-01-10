@@ -19,14 +19,12 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
     ? [] 
     : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
-    // || book.authors[0].toLowerCase().includes(query.toLowerCase())  
+    || book.authors[0].toLowerCase().includes(query.toLowerCase())  
     // || book.authors[1].toLowerCase().includes(query.toLowerCase())
     // ||book.industryIdentifiers[0].idendifier.includes(query)
     // || book.industryIdentifiers[1].idendifier.includes(query)
     )
 
-
-    
     const handleChange = (e) => {
         setQuery(e.target.value);
       };  
