@@ -15,8 +15,8 @@ return (
              height: 193,
              backgroundImage:
               `url(${url})` 
-             }}
               // || `url(${urlWithThumbnail})` 
+             }}
            ></div>
            <BookShelfManager
            key={id}
@@ -29,9 +29,7 @@ return (
            />    
          </div>
          <div className="book-title">{title}</div> 
-         <div className="book-authors">{authors }</div> 
-          {/* && authors.join(", ") */}
-
+         <div className="book-authors">{authors && authors.join(", ") }</div> 
        </div>
      </li>   
     </>

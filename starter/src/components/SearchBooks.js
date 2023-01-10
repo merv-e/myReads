@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from "../BooksAPI";
 import SearchedBooksWithShelfInfo from './SearchedBooksWithShelfInfo';
+import { PropTypes } from 'prop-types';
 
 const SearchBooks = ({ data, updateBook, getBook }) => {
 
@@ -14,43 +15,42 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
   // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchBook variable will filter it accordingly.
  
   const searchBook =   
-    query.length >=1 // || query === "" // query.length === 0
-    ? newSetOfBooks.filter((book) => 
+    query === "" // ||  query.length >=1 // query.length === 0
+    ? [] 
+    : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
-    || book.authors[0].toLowerCase().includes(query.toLowerCase())  
+    // || book.authors[0].toLowerCase().includes(query.toLowerCase())  
     // || book.authors[1].toLowerCase().includes(query.toLowerCase())
     // ||book.industryIdentifiers[0].idendifier.includes(query)
     // || book.industryIdentifiers[1].idendifier.includes(query)
     )
-    : [] 
-    // ? alert("Please search for something ")
-    // : []; //[] ;
+
+
     
     const handleChange = (e) => {
         setQuery(e.target.value);
       };  
-
-    useEffect(()=> {
-      // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
-      const search = async () => { 
-        const result = await BooksAPI.search(query, 20).then(book => setNewSetOfBooks(book));
-     
-        // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
- 
-      };
-
-      const limit = setTimeout(()=> {
+      
+      useEffect(()=> {
+        // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
+        const search = async () => { 
+          const result = await BooksAPI.search(query, 20).then(book => setNewSetOfBooks(book));
+          // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
+        };
+        
+        const limit = setTimeout(()=> {
           search();
-          console.log("searching");
+          // console.log("searching");
         }, 5000);
         
-       
         return () => {
-            clearTimeout(limit);
-            console.log("cleanup");
+          clearTimeout(limit);
+          // console.log("cleanup");
         }
     }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmiyor!
     
+    // console.log(newSetOfBooks);
+
   return (
     <div className="search-books">
           <div className="search-books-bar">  
@@ -68,11 +68,6 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
             </div>
           </div>
           <div className="search-books-results">
-         {/* kosullu olarak ya loading gelecek ya da kitaplar :)*/}
-         {/* { 
-          <h1>LOADING</h1> 
-         }  */}
-         
          <SearchedBooksWithShelfInfo 
           searchBook={ searchBook}
           data = {data}
@@ -82,6 +77,12 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
           </div>
         </div>
   )
+}
+
+SearchBooks.propTypes = {
+  data: PropTypes.array.isRequired,
+  updateBook: PropTypes.func.isRequired,
+  // searchBook : PropTypes.array.isRequired
 }
 
 export default SearchBooks

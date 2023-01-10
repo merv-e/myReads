@@ -9,7 +9,6 @@ const SearchedBooksWithShelfInfo = ({searchBook, data, updateBook, getBook, id, 
             if (book.id === b.id) {
              book.shelf = b.shelf
             } 
-            // else book.shelf = "none";
             return b;
           })
           return book;
@@ -29,7 +28,11 @@ const SearchedBooksWithShelfInfo = ({searchBook, data, updateBook, getBook, id, 
               }
               title = {book.title}
               authors = {book.authors}
-              url={book.imageLinks.smallThumbnail }
+              url={
+                book.imageLinks.smallThumbnail 
+                ? book.imageLinks.smallThumbnail  
+                : book.imageLinks.thumbnail
+                }
               book = {book}
               searchBook = {searchBook}
               updateBook = {updateBook}

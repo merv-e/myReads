@@ -36,15 +36,16 @@ const App = () => {
     // getData(); // bu nereden cikti islevsel mi hicbir fikrim yok :/ 
   };
   
+  //  bookId and shelf information will be transfered from child components.  
+  //    const getBook = (bookId, shelf) => {
+    //      const res=  BooksAPI.get(bookId);
+    // updateBook(res, shelf);
+// };
 
-  ///// ??????
-  //  bookId and shelf information will be transfered from child components.
-  const getBook = (bookId, shelf) => {
-    const res=  BooksAPI.get(bookId); 
-    // this call is made, so that after user searchs a book and is chosen to be on any shelf, it'll also update the book in backend.
-    updateBook(res, shelf);
-};
-  
+    // this call is made (getBook), so that after user searchs a book and is chosen to be on any shelf, it'll also update the book in backend.
+    
+    // That's what i Thought it would do (above), however it perfectly works without this API call. I'm not entirely sure what I'm supposed to use this for.
+
     return (
       <div className="app">
         <Routes>
@@ -54,7 +55,7 @@ const App = () => {
             <Library 
               data = {data}
               updateBook={updateBook}
-              getBook={getBook}
+              // getBook={getBook}
             />        
           }
           />
@@ -65,12 +66,10 @@ const App = () => {
             <SearchBooks 
               data = {data}
               updateBook={updateBook}
-              getBook={getBook}
-              // getData={getData}
+              // getBook={getBook}
             />
           }
           />  
-
         </Routes>   
       </div>
     );

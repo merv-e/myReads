@@ -2,39 +2,6 @@ import React from 'react'
 import Book from './Book';
 
 const Shelves = ({shelfNamesImmutable, nameOfTheShelf, data, updateBook, getBook}) => {
-  
-
-    // const [currentlyReading, setCurrentlyReading] = useState(data.filter((book) => book.shelf === "currentlyReading"));
-    
-    // const [wantToRead, setWantToRead] = useState(data.filter((book) => book.shelf === "wantToRead"));
-    // //               
-    // const [read, setRead] = useState(data.filter((book) => book.shelf === "read"));
-    
-    // const [none, setNone] = useState([]);
-
-// const mappedData = 
-//   data.filter((book) => 
-//   book.shelf === "currentlyReading"
-//   ? setCurrentlyReading([...currentlyReading ,theBook])
-//   : book.shelf === "wantToRead" 
-//   ? setWantToRead([...wantToRead, theBook])
-//   : book.shelf === "read" 
-//   ? setRead([...read, theBook])
-//   : setNone([...none, theBook])
-//   );
-//   console.log(mappedData);
-  
-// const books = 
-//   mappedData === "currentlyReading" 
-//   ? setCurrentlyReading(currentlyReading.concat(theBook))
-//   : mappedData === "wantToRead" 
-//   ? setWantToRead([...wantToRead, theBook])
-//   : mappedData === "read" 
-//   ? setRead([...read, theBook])
-//   : setNone([...none, theBook]);
-
-// const filterShelf = ;
-// console.log(shelf);
  
   return (
     <div className="bookshelf">
@@ -51,10 +18,10 @@ const Shelves = ({shelfNamesImmutable, nameOfTheShelf, data, updateBook, getBook
               shelf={book.shelf}
               title = {book.title}
               authors = {book.authors}
-              url={book.imageLinks.smallThumbnail }
+              url={book.imageLinks.smallThumbnail || book.imageLinks.thumbnail }
               book = {book}
               updateBook={updateBook}
-              // getBook = {getBook}
+              getBook = {getBook}
             />  
         )}
           </ol>
