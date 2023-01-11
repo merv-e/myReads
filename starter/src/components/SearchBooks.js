@@ -15,12 +15,13 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
   // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchBook variable will filter it accordingly.
  
   const searchBook =   
-    query === "" // ||  query.length >=1 // query.length === 0
+  query === "" 
     ? [] 
     : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
     )
 
+    // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
     const handleChange = (e) => {
         setQuery(e.target.value);
       };  
@@ -28,22 +29,18 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
       useEffect(()=> {
         // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
         const search = async () => { 
-          const result = await BooksAPI.search(query, 20).then(book => setNewSetOfBooks(book));
-          // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
+          const result = await BooksAPI.search(query, 20)
+           .then(book => setNewSetOfBooks(book));
         };
         
         const limit = setTimeout(()=> {
           search();
-          // console.log("searching");
         }, 5000);
         
         return () => {
           clearTimeout(limit);
-          // console.log("cleanup");
         }
-    }, [newSetOfBooks, query]); //newSetOFBooks dependency array'den kaldırılınca sürekli re-render yapmiyor!
-    
-    // console.log(newSetOfBooks);
+    }, [newSetOfBooks, query]); 
 
   return (
     <div className="search-books">
