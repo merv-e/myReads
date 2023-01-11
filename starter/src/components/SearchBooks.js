@@ -80,7 +80,6 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
 SearchBooks.propTypes = {
   data: PropTypes.array.isRequired,
   updateBook: PropTypes.func.isRequired,
-  // searchBook : PropTypes.array.isRequired
 }
 
 export default SearchBooks
