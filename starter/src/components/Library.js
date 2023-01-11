@@ -21,7 +21,7 @@ const Library = ({ data, updateBook, getBook }) => {
     <div className="list-books-content"> 
       <div>
         {
-        shelfName.filter(shelfName => shelfName.shelf !== "none")
+        shelfName.filter(name => name.shelf !== "none")
         .map((info, index) => (
           <Shelves 
           key = {index}
