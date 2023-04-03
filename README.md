@@ -11,13 +11,13 @@ There are two pages : Main page and search page. In the main page, you can find 
 
  - You can simply change the shelf of a book that it is in by clicking the down-arrow button or remove the book from any of the shelves by clicking "None".  
  
- ![Main Page](./src/screenshots/main-page1.png)
+ ![Main Page](./screenshots/main-page1.png)
  The screenshot above depicts the main page, where red square is the menu for changing/removing book from a shelf, the blue square is for navigating to the search page. 
 
 ## Search Page
 - You can search for books (please note that the search is limited by some keywords) and add/change the book to any shelf that is on the main page.
 
-![Search Page](./src/screenshots/search-page.jpg)
+![Search Page](./screenshots/search-page.jpg)
   -------------------------
 <br>
 
