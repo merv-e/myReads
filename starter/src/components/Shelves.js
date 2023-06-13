@@ -22,7 +22,6 @@ const Shelves = ({shelfNamesImmutable, nameOfTheShelf, data, updateBook, getBook
                 book.imageLinks 
                 ? book.imageLinks.thumbnail 
                 : book.imageLinks.smallThumbnail
-                // book.imageLinks.smallThumbnail || book.imageLinks.thumbnail 
                 }
               book = {book}
               updateBook={updateBook}

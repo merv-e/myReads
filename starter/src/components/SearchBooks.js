@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types';
 const SearchBooks = ({ data, updateBook, getBook }) => {
 
   const [query, setQuery] = useState("");
-  // const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState();
 
  // data comes with the API call will be stored in the variable below for the search page.  
   const [newSetOfBooks, setNewSetOfBooks] = useState([]);
@@ -16,31 +16,48 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
  
   const searchBook =   
   query === "" 
-    ? [] 
+    ? newSetOfBooks 
     : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
     )
 
     // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
     const handleChange = (e) => {
-        setQuery(e.target.value);
-      };  
+      setQuery(e.target.value);
+      console.log('Typing...');
+    };  
       
-      useEffect(()=> {
+    console.log(newSetOfBooks);          
+
+      useEffect(() => {
+        
+        if(query.length === 0) {
+          console.log("There's nothing to look for.")
+          
+          return ( 
+            <p>Please search for a book.</p>
+            );
+        };
+
         // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
-        const search = async () => { 
-          const result = await BooksAPI.search(query, 20)
-           .then(book => setNewSetOfBooks(book));
+
+        const search = async () => {
+          const result = await BooksAPI.search(query, 20).then((book) =>
+          setNewSetOfBooks(book)
+          );
+          console.log("I am making an HTTP request");
         };
         
-        const limit = setTimeout(()=> {
+         const limit = setTimeout(() => {
+          console.log("Hello, I'm still searching, don't limit me!");
           search();
-        }, 5000);
-        
+        }, 3000);
+
         return () => {
+          console.log("CLEANUP!");
           clearTimeout(limit);
-        }
-    }, [newSetOfBooks, query]); 
+        };
+      }, [query]); //
 
   return (
     <div className="search-books">
@@ -58,14 +75,24 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
               />
             </div>
           </div>
-          <div className="search-books-results">
-         <SearchedBooksWithShelfInfo 
-          searchBook={ searchBook}
-          data = {data}
-          updateBook = {updateBook}
-          getBook = {getBook}
-         />
-          </div>
+          
+          {
+            newSetOfBooks.length === 0  
+            ? <p>No such book has been found.</p>
+            : (
+
+            <div className="search-books-results">
+              <SearchedBooksWithShelfInfo 
+                searchBook={ searchBook}
+                data = {data}
+                updateBook = {updateBook}
+                getBook = {getBook}
+              />
+            </div>
+
+          )
+          }
+
         </div>
   )
 }
