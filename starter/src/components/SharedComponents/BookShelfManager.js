@@ -1,6 +1,6 @@
 import React, {  useState } from 'react';
 
-const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  newSetOfBooks, handleChange }) => { 
+const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook }) => { 
 
   //which shelf the book is on the main page
   const [whichShelf , setWhichShelf] = useState(shelf);

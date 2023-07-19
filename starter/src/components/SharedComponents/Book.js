@@ -25,12 +25,11 @@ const Book = ({
               }}
             ></div>
             <BookShelfManager
-              key={id}
-              id={id}
               updateBook={updateBook}
-              book={book}
-              title={book.title}
               shelf={shelf}
+              title={book.title}
+              book={book}
+              id={id}
               getBook={getBook}
             />
           </div>
