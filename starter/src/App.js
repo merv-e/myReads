@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as BooksAPI from "./BooksAPI";
 import { Route, Routes } from "react-router-dom";
 import SearchBooks from "./components/Search/SearchBooks";
@@ -9,16 +9,16 @@ const App = () => {
   // books comes with the API call will be stored here for the main page
   const [books, setBooks] = useState([]);
 
-  const fetchBooks = async () => {
+  const fetchBooks = useCallback( async() => {
     const res = await BooksAPI.getAll();
     setBooks(res);
-  };
+  }, []);
 
   useEffect(() => {
     // eger bookshelf managerdaki veri degisiyorsa... fetchBooks'yi cagir.
     //  if(load)
     fetchBooks();
-  }, []); //books
+  }, [fetchBooks]); 
   // not: contacts.app'de contacts'i dependency arr. yazilmamis
 
   console.log(books); 
@@ -29,7 +29,7 @@ const App = () => {
 
   const updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf);
-    // fetchBooks(); // bu nereden cikti islevsel mi hicbir fikrim yok :/
+    fetchBooks();
   };
 
   //  bookId and shelf information will be transfered from child components.
@@ -52,7 +52,7 @@ const App = () => {
             <Library
               books={books}
               updateBook={updateBook}
-              // getBook={getBook}
+              getBook={getBook}
             />
           }
         />
@@ -63,8 +63,7 @@ const App = () => {
             <SearchBooks
               books={books}
               updateBook={updateBook}
-              // getBook={getBook}
-              
+              getBook={getBook}
             />
           }
         />

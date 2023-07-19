@@ -8,7 +8,7 @@ const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook, data,  
   const handleSelection = (e) => {
     setWhichShelf(e.target.value);
     updateBook(book, e.target.value); 
-    // getBook(id, e.target.value);
+    getBook(id, e.target.value);
   };
   
   return (
