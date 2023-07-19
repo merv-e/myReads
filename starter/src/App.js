@@ -1,36 +1,35 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import * as BooksAPI from "./BooksAPI";
-import SearchBooks from "./components/SearchBooks";
 import { Route, Routes } from "react-router-dom";
-import Library from "./components/Library";
+import SearchBooks from "./components/Search/SearchBooks";
+import Library from "./components/Library/Library";
 
 const App = () => {
-  // data comes with the API call will be stored here for the main page
-  const [data, setData] = useState([]);
-  const getData = async () => {
+  // books comes with the API call will be stored here for the main page
+  const [books, setBooks] = useState([]);
+
+  const fetchBooks = async () => {
     const res = await BooksAPI.getAll();
-    setData(res);
-    /* YUKARIDAKINI SILIP SUNU BI DENEYELIM */
-    //  .then(books => setData(books));
+    setBooks(res);
   };
 
   useEffect(() => {
-    // eger bookshelf managerdaki veri degisiyorsa... getData'yi cagir.
+    // eger bookshelf managerdaki veri degisiyorsa... fetchBooks'yi cagir.
     //  if(load)
-    getData();
-  }, []); //data
+    fetchBooks();
+  }, []); //books
   // not: contacts.app'de contacts'i dependency arr. yazilmamis
 
-  console.log(data); 
+  console.log(books); 
 
-  //data'yi dependency arr eklemezsek surekli render etmiyor. ancak cikarirsak da bu sefer kitap rafını değiştirdiğimizde anlık işlem yapmıyor ! :/
+  //books'yi dependency arr eklemezsek surekli render etmiyor. ancak cikarirsak da bu sefer kitap rafını değiştirdiğimizde anlık işlem yapmıyor ! :/
 
   // book and shelf information will be transfered from child components which are BookShelf and SearchBooks.
 
   const updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf);
-    // getData(); // bu nereden cikti islevsel mi hicbir fikrim yok :/
+    // fetchBooks(); // bu nereden cikti islevsel mi hicbir fikrim yok :/
   };
 
   //  bookId and shelf information will be transfered from child components.
@@ -51,7 +50,7 @@ const App = () => {
           path="/"
           element={
             <Library
-              data={data}
+              books={books}
               updateBook={updateBook}
               // getBook={getBook}
             />
@@ -62,7 +61,7 @@ const App = () => {
           path="/search"
           element={
             <SearchBooks
-              data={data}
+              books={books}
               updateBook={updateBook}
               // getBook={getBook}
               

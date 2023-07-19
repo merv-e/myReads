@@ -1,7 +1,6 @@
-import React from 'react'
-import Book from './Book';
+import Book from '../SharedComponents/Book';
 
-const Shelves = ({shelfNamesImmutable, nameOfTheShelf, data, updateBook, getBook}) => {
+const Shelves = ({shelfNamesImmutable, nameOfTheShelf, books, updateBook, getBook}) => {
  
   return (
     <div className="bookshelf">
@@ -9,10 +8,9 @@ const Shelves = ({shelfNamesImmutable, nameOfTheShelf, data, updateBook, getBook
         <div className="bookshelf-books">
           <ol className="books-grid">
           {
-          data.filter(book => book.shelf === shelfNamesImmutable)
+          books.filter(book => book.shelf === shelfNamesImmutable)
           .map(book => 
             <Book 
-              data={data} 
               key={book.id}
               id = {book.id}
               shelf={book.shelf}

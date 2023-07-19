@@ -1,11 +1,11 @@
 import React from 'react'
-import Book from './Book';
+import Book from '../SharedComponents/Book';
 
-const SearchedBooksWithShelfInfo = ({searchBook, data, updateBook, getBook, id, shelf }) => {
+const SearchedBooksWithShelfInfo = ({searchBook, books, updateBook, getBook, id, shelf }) => {
 
   const myBooksUpdated = 
     searchBook.map((book) => {
-      data.map((b) => {
+      books.map((b) => {
         if (book.id === b.id) {
          book.shelf = b.shelf
         } 

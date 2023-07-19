@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import * as BooksAPI from "../BooksAPI";
+import * as BooksAPI from "../../BooksAPI";
 import SearchedBooksWithShelfInfo from './SearchedBooksWithShelfInfo';
 import { PropTypes } from 'prop-types';
 
-const SearchBooks = ({ data, updateBook, getBook }) => {
+const SearchBooks = ({ books, updateBook, getBook }) => {
 
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState();
 
- // data comes with the API call will be stored in the variable below for the search page.  
+ // books comes with the API call will be stored in the variable below for the search page.  
   const [newSetOfBooks, setNewSetOfBooks] = useState([]);
 
   // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchBook variable will filter it accordingly.
  
   const searchBook =   
   query === "" 
-    ? newSetOfBooks 
+    ? newSetOfBooks // [] 
     : newSetOfBooks.filter((book) => 
     book.title.toLowerCase().includes(query.toLowerCase())
     )
@@ -84,7 +84,7 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
             <div className="search-books-results">
               <SearchedBooksWithShelfInfo 
                 searchBook={ searchBook}
-                data = {data}
+                books = {books}
                 updateBook = {updateBook}
                 getBook = {getBook}
               />
@@ -98,7 +98,7 @@ const SearchBooks = ({ data, updateBook, getBook }) => {
 }
 
 SearchBooks.propTypes = {
-  data: PropTypes.array.isRequired,
+  books: PropTypes.array.isRequired,
   updateBook: PropTypes.func.isRequired,
 }
 
