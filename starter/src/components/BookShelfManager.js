@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 
-const BookShelfManager = ({
-  updateBook,
-  shelf,
-  title,
-  book,
-  id,
-  // getBook,
-  // data,
-  // newSetOfBooks,
-  // handleChange,
-}) => {
-  //which shelf the book is on the main page
+const BookShelfManager = ({ updateBook, shelf, title, book, id, getBook }) => {
+  //which shelf the book is on
   const [whichShelf, setWhichShelf] = useState(shelf);
 
   const handleSelection = (e) => {
     setWhichShelf(e.target.value);
     updateBook(book, e.target.value);
-    // getBook(id, e.target.value);
+    getBook(id, e.target.value);
   };
 
   return (
