@@ -173,3 +173,11 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+
+.loading {
+  font-size: 50px;
+  font-family: inherit;
+  text-align: center;
+  padding: 50px;
+}
+
