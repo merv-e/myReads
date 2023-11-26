@@ -1,50 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import * as BooksAPI from "../../BooksAPI";
-import SearchedBooksWithShelfInfo from "./SearchedBooksWithShelfInfo";
+import * as BooksAPI from "../../services/BooksAPI";
+import ShelfInfo from "./ShelfInfo ";
 import { PropTypes } from "prop-types";
 
-const SearchBooks = ({ books, updateBook, getBook }) => {
-  const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState();
+const SearchBooks = (props) => {
+  const { data, updateBook, getBook } = props; //destructuring
 
-  // books comes with the API call will be stored in the variable below for the search page.
+  // data comes with the API call will be stored in the variable below.
   const [newSetOfBooks, setNewSetOfBooks] = useState([]);
+  const [query, setQuery] = useState("");
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchBook variable will filter it accordingly.
+  // it'll take the query variable (a.k.a where user searchs for books) , if it's empty which is the default value, it'll show nothing. However, if user starts typing something the query will be updated and searchResults variable will filter it accordingly.
 
-  const searchBook =
+  const searchResults =
     query === ""
-    ? newSetOfBooks // []
-    : newSetOfBooks.filter((book) =>
-      book.title.toLowerCase().includes(query.toLowerCase())
-    );
-
-  // this is where we also capture what user types and send it to make a call to the API so that searchBook variable can filter the books for us.
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-    console.log("Typing...");
-  };
+      ? newSetOfBooks //[]
+      : newSetOfBooks.filter((book) =>
+          book.title.toLowerCase().includes(query.toLowerCase())
+        );
 
   useEffect(() => {
     // when the user navigates to the search page and types a title, id etc. it'll show the relevant books.
+    const searchBooks = async () => {
+      try {
+        setIsLoading(true);
+        const response = await BooksAPI.search(query, 20);
 
-    const search = async () => {
-      const result = await BooksAPI.search(query, 20)
-      .then((book) =>
-        setNewSetOfBooks(book)
-      );
+        console.log("response", response);
+        console.log("response:", response.error);
+
+        if (!response.error) {
+          setNewSetOfBooks(response);
+          setError(null);
+        }
+      } catch (error) {
+        setError("An error occurred while fetching books.");
+        console.error("Error fetching books:", error);
+      }
+      setIsLoading(false);
     };
 
-    const limit = setTimeout(() => {
-      search();
+    const debounce = setTimeout(() => {
+      if (query) {
+        searchBooks();
+      }
     }, 3000);
 
-    return () => {
-      console.log("CLEANUP!");
-      clearTimeout(limit);
-    };
-  }, [query]); 
+    // cleanup function
+    return () => clearTimeout(debounce);
+  }, [query]);
+
+  console.log("newSetOfBooks", newSetOfBooks);
+  console.log("searchResults", searchResults);
 
   return (
     <div className="search-books">
@@ -57,20 +67,27 @@ const SearchBooks = ({ books, updateBook, getBook }) => {
             type="text"
             placeholder="Search by title, author, or ISBN"
             value={query}
-            onChange={handleChange}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </div>
       </div>
 
-      {newSetOfBooks.length === 0 ? (
-        <p>No such book has been found.</p>
-      ) : (
+      {isLoading && <p className="loading">Loading...</p>}
+
+      {!isLoading &&  searchResults.length === 0 && (
+        <p>No books found for the query.</p>
+      )}
+
+      {!isLoading && error && <p style={{ color: "red" }}>{error}</p>}
+
+      {!isLoading && (
         <div className="search-books-results">
-          <SearchedBooksWithShelfInfo
-            searchBook={searchBook}
-            books={books}
+          <ShelfInfo
+            searchResults={searchResults}
+            data={data}
             updateBook={updateBook}
             getBook={getBook}
+            query={query}
           />
         </div>
       )}
@@ -79,8 +96,9 @@ const SearchBooks = ({ books, updateBook, getBook }) => {
 };
 
 SearchBooks.propTypes = {
-  books: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   updateBook: PropTypes.func.isRequired,
+  getBook: PropTypes.func.isRequired,
 };
 
 export default SearchBooks;
