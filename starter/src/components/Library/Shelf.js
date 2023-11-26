@@ -1,9 +1,4 @@
-<<<<<<<< HEAD:starter/src/components/Library/Shelf.js
 import Book from '../SharedComponents/Book';
-========
-import React from 'react'
-import Book from '../Book';
->>>>>>>> ignore-last-changes:starter/src/components/Library/Shelves.js
 
 const Shelves = ({shelfNamesImmutable, nameOfTheShelf, books, updateBook, getBook}) => {
  

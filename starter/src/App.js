@@ -1,31 +1,46 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-import * as BooksAPI from "./services/BooksAPI";
-import SearchBooks from "./components/Search/SearchBooks";
+import { useCallback, useEffect, useState } from "react";
+import * as BooksAPI from "./BooksAPI";
 import { Route, Routes } from "react-router-dom";
+import SearchBooks from "./components/Search/SearchBooks";
 import Library from "./components/Library/Library";
 
 const App = () => {
-  // data comes with the API call will be stored here for the main page
-  const [data, setData] = useState([]);
+  // books comes with the API call will be stored here for the main page
+  const [books, setBooks] = useState([]);
 
-  const getData = async () => {
+  const fetchBooks = useCallback(async () => {
     const res = await BooksAPI.getAll();
-    setData(res);
-  };
+    setBooks(res);
+  }, []);
+
+  // const { shelf } = books;
+  // console.log(shelf);
 
   useEffect(() => {
-    getData();
-  }, []);
+    fetchBooks();
+    console.log("Fetching Books!!");
+  }, [fetchBooks]);
+
+  // console.log(books);
+
+  //  bookId and shelf information will be transfered from child components.
+  const getBook = (bookId, shelf) => {
+    const res = BooksAPI.get(bookId);
+    console.log("GetBook is working!");
+    updateBook(res, shelf);
+
+    console.log("GETBOOK", res, shelf);
+  };
+  // this call is made (getBook), so that after user searchs a book and is chosen to be on any shelf, it'll also update the book in backend.
+
+  // book and shelf information will be transfered from child components which are BookShelf and SearchBooks.
 
   const updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf);
-    getData();
-  };
+    console.log("UPDATEBOOK:", "Book:", book, "Shelf:", shelf);
 
-  const getBook = (bookId, shelf) => {
-    const res = BooksAPI.get(bookId);
-    updateBook(res, shelf);
+    fetchBooks();
   };
 
   return (
@@ -35,14 +50,15 @@ const App = () => {
           exact
           path="/"
           element={
-            <Library data={data} updateBook={updateBook} getBook={getBook} />
+            <Library books={books} updateBook={updateBook} getBook={getBook} />
           }
         />
+
         <Route
           path="/search"
           element={
             <SearchBooks
-              data={data}
+              books={books}
               updateBook={updateBook}
               getBook={getBook}
             />
