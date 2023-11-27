@@ -16,16 +16,19 @@ const App = () => {
 
   useEffect(() => {
     fetchBooks();
+    console.log("fetchBooks is called!", fetchBooks);
   }, []);
-
-  const getBook = (bookId, shelf) => {
-    const res = BooksAPI.get(bookId);
-    updateBook(res, shelf);
-  };
 
   const updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf);
     fetchBooks();
+    (console.log("updateBook is updated!:", updateBook))
+  };
+
+  const getBook = (bookId, shelf) => {
+    const res = BooksAPI.get(bookId);
+    updateBook(res, shelf);
+    (console.log("getBook is updated!:", getBook))
   };
 
   return (
