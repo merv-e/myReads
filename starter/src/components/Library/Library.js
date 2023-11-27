@@ -7,7 +7,7 @@ const Library = ({ books, updateBook, getBook }) => {
     { shelf: "currentlyReading", name: "Currently Reading" },
     { shelf: "wantToRead", name: "Want To Read" },
     { shelf: "read", name: "Read" },
-    { shelf: "none", name: "None" }, //this option doesn't seem to be necessary, check it out.
+    { shelf: "none", name: "None" },
   ];
 
   return (
@@ -16,9 +16,9 @@ const Library = ({ books, updateBook, getBook }) => {
         <h1>MyReads</h1>
       </div>
       <div className="list-books-content">
-        <div> {/* this div mght be deleted. */}
+        <div>
           {shelfName
-            .filter((name) => name.shelf !== "none") //if "none" is not useful, instead of filtering, just map!
+            .filter((name) => name.shelf !== "none")
             .map((info, index) => (
               <Shelf
                 key={index}
