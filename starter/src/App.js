@@ -6,7 +6,7 @@ import SearchBooks from "./components/Search/SearchBooks";
 import Library from "./components/Library/Library";
 
 const App = () => {
-  // books comes with the API call will be stored here for the main page
+  // books comes with the API call (fetchBooks) will be stored here for the main page
   const [books, setBooks] = useState([]);
 
   const fetchBooks = async () => {
@@ -16,19 +16,16 @@ const App = () => {
 
   useEffect(() => {
     fetchBooks();
-    console.log("fetchBooks is called!", fetchBooks);
   }, []);
 
   const updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf);
     fetchBooks();
-    (console.log("updateBook is updated!:", updateBook))
   };
 
   const getBook = (bookId, shelf) => {
     const res = BooksAPI.get(bookId);
     updateBook(res, shelf);
-    (console.log("getBook is updated!:", getBook))
   };
 
   return (
